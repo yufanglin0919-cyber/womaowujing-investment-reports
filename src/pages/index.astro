@@ -353,14 +353,19 @@ const posts = [
         <h2>订阅我的美股投策更新</h2>
         <p>输入邮箱后，当发布新的市场观察或调仓记录时，你会收到邮件提醒。</p>
 
-        <form action="这里填邮件平台给你的订阅地址" method="post">
-          <input 
-            type="email" 
-            name="email" 
-            placeholder="请输入你的邮箱" 
-            required 
-          />
-          <button type="submit">订阅更新</button>
+        <form
+          action="https://buttondown.com/api/emails/embed-subscribe/yufang"
+          method="post"
+          class="embeddable-buttondown-form"
+        >
+          <label for="bd-email">Enter your email</label>
+          <input type="email" name="email" id="bd-email" />
+          <input type="submit" value="Subscribe" />
+          <p>
+            <a href="https://buttondown.com/refer/yufang" target="_blank">
+              Powered by Buttondown.
+            </a>
+          </p>
         </form>
       </section>
 
