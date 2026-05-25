@@ -6,7 +6,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://womaowujing-investment-reports.netlify.app',
+	site: 'womaowujing-investment-reports-6mr4-uyo92k6hf.vercel.app',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{
