@@ -1,0 +1,378 @@
+---
+const posts = [
+  {
+    title: "本周美股科技股观察：AI算力主线仍然强势",
+    date: "2026-05-24",
+    category: "市场周报",
+    desc: "从AI算力、半导体、云计算、数据中心、宏观利率和估值风险等角度，复盘本周美股科技股表现，并总结后续重点观察方向。",
+    link: "/articles/us-tech-weekly-2026-05-24"
+  },
+       {
+     title: "2026-05-14 调仓收益记录",
+     date: "2026-05-14",
+     category: "调仓收益记录",
+     desc: "本次调仓收益记录",
+     link: "/articles/stock_hold_2026-05-14"
+   },
+     {
+     title: "2026-04-16 调仓收益记录",
+     date: "2026-04-16",
+     category: "调仓收益记录",
+     desc: "本次调仓收益记录",
+     link: "/articles/stock_hold_2026-04-16"
+   },
+
+];
+---
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>398的美股策略</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, "Microsoft YaHei", sans-serif;
+        background: #f5f7fb;
+        color: #1f2937;
+      }
+
+      header {
+        background-image:
+          linear-gradient(
+            rgba(15, 23, 42, 0.65),
+            rgba(15, 23, 42, 0.75)
+          ),
+          url("/images/hero-bg.jpg");
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        color: white;
+        padding: 56px 10% 72px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 72px;
+      }
+
+      .logo {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 1px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 28px;
+        font-weight: 600;
+        opacity: 0.92;
+      }
+
+      nav a:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+
+      .hero {
+        max-width: 820px;
+      }
+
+      .site-title {
+        font-size: 46px;
+        line-height: 1.25;
+        font-weight: 900;
+        margin-bottom: 20px;
+      }
+
+      .subtitle {
+        font-size: 19px;
+        line-height: 1.9;
+        opacity: 0.95;
+      }
+
+      .tags {
+        margin-top: 26px;
+      }
+
+      .tag {
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.16);
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      main {
+        max-width: 1120px;
+        margin: 56px auto;
+        padding: 0 24px;
+      }
+
+      .intro {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 42px;
+        box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08);
+        line-height: 1.9;
+      }
+
+      .intro h1 {
+        font-size: 28px;
+        margin-top: 0;
+      }
+
+      .intro p {
+        color: #4b5563;
+      }
+
+      .section-title {
+        font-size: 28px;
+        margin-bottom: 24px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+        gap: 24px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 20px;
+        padding: 28px;
+        box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 36px rgba(15, 23, 42, 0.12);
+      }
+
+      .category {
+        display: inline-block;
+        font-size: 14px;
+        color: #1d4ed8;
+        font-weight: 800;
+        margin-bottom: 10px;
+      }
+
+      .card h2 {
+        font-size: 22px;
+        line-height: 1.45;
+        margin: 8px 0 10px;
+      }
+
+      .card p {
+        line-height: 1.8;
+        color: #4b5563;
+      }
+
+      .date {
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .read-more {
+        display: inline-block;
+        margin-top: 16px;
+        color: #1d4ed8;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .read-more:hover {
+        text-decoration: underline;
+      }
+
+      .disclaimer {
+        margin-top: 54px;
+        background: #eef2ff;
+        border-left: 5px solid #2563eb;
+        border-radius: 14px;
+        padding: 22px 26px;
+        line-height: 1.8;
+        color: #374151;
+      }
+
+      footer {
+        text-align: center;
+        color: #6b7280;
+        padding: 42px 20px;
+        font-size: 14px;
+      }
+
+      @media (max-width: 700px) {
+        header {
+          padding: 36px 24px 56px;
+        }
+
+        nav {
+          display: block;
+          margin-bottom: 52px;
+        }
+
+        nav div:last-child {
+          margin-top: 18px;
+        }
+
+        nav a {
+          margin-left: 0;
+          margin-right: 18px;
+        }
+
+        .site-title {
+          font-size: 36px;
+        }
+      }
+            .disclaimer {
+        margin-top: 54px;
+        background: #eef2ff;
+        border-left: 5px solid #2563eb;
+        border-radius: 14px;
+        padding: 22px 26px;
+        line-height: 1.8;
+        color: #374151;
+      }
+
+      /* 订阅框样式放这里 */
+      .subscribe-box {
+        margin-top: 54px;
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08);
+      }
+
+      .subscribe-box h2 {
+        font-size: 24px;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      .subscribe-box p {
+        color: #4b5563;
+        line-height: 1.8;
+        margin-bottom: 20px;
+      }
+
+      .subscribe-box form {
+        display: flex;
+        gap: 12px;
+      }
+
+      .subscribe-box input {
+        flex: 1;
+        padding: 12px 14px;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        font-size: 16px;
+      }
+
+      .subscribe-box button {
+        padding: 12px 18px;
+        border: none;
+        border-radius: 10px;
+        background: #2563eb;
+        color: white;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .subscribe-box button:hover {
+        background: #1d4ed8;
+      }
+
+      footer {
+        text-align: center;
+        color: #6b7280;
+        padding: 42px 20px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <div class="logo">398 的美股策略</div>
+        <div>
+          <a href="/">首页</a>
+          <a href="/about">关于我</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div class="site-title">398的美股策略</div>
+        <div class="subtitle">
+          用数据识别趋势，用规则减少情绪<br />
+        </div>
+
+        <div class="tags">
+          <span class="tag">美股基本面分析</span>
+          <span class="tag">策略复盘</span>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="intro">
+        <h1>简介</h1>
+        <p>
+    这是一个记录美股科技股研究、纳斯达克市场观察和量化策略复盘的网站。
+        </p>
+      </section>
+
+      <h1 class="section-title">最新文章</h1>
+
+      <section class="grid">
+        {posts.map((post) => (
+          <article class="card">
+            <div class="category">{post.category}</div>
+            <h2>{post.title}</h2>
+            <div class="date">{post.date}</div>
+            <p>{post.desc}</p>
+            <a class="read-more" href={post.link}>阅读全文 →</a>
+          </article>
+        ))}
+      </section>
+      
+      <section class="subscribe-box">
+        <h2>订阅我的美股投策更新</h2>
+        <p>输入邮箱后，当发布新的市场观察或调仓记录时，你会收到邮件提醒。</p>
+
+        <form action="这里填邮件平台给你的订阅地址" method="post">
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="请输入你的邮箱" 
+            required 
+          />
+          <button type="submit">订阅更新</button>
+        </form>
+      </section>
+
+      <section class="disclaimer">
+        <strong>风险提示：</strong>
+        本网站所有内容仅为个人投研记录，不构成任何证券投资建议，
+        不作为买入、卖出或持有任何证券的依据。投资有风险，入市需谨慎。
+      </section>
+    </main>
+
+    <footer>
+      © 2026 398的美股策略 ｜ 个人投研记录，不构成投资建议
+    </footer>
+  </body>
+</html>
