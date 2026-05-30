@@ -1,34 +1,51 @@
 ---
-const posts = [
+const projects = [
   {
-    title: "本周美股科技股观察：AI算力主线仍然强势",
-    date: "2026-05-24",
-    category: "市场周报",
-    desc: "从AI算力、半导体、云计算、数据中心、宏观利率和估值风险等角度，复盘本周美股科技股表现，并总结后续重点观察方向。",
-    link: "/articles/us-tech-weekly-2026-05-24"
+    title: "Data Analysis Research Notebook",
+    category: "Research Workflow",
+    desc: "Organizing datasets, assumptions, and evaluation notes into a clear research process that can be reviewed and improved over time."
   },
-       {
-     title: "2026-05-14 调仓收益记录",
-     date: "2026-05-14",
-     category: "调仓收益记录",
-     desc: "本次调仓收益记录",
-     link: "/articles/stock_hold_2026-05-14"
-   },
-     {
-     title: "2026-04-16 调仓收益记录",
-     date: "2026-04-16",
-     category: "调仓收益记录",
-     desc: "本次调仓收益记录",
-     link: "/articles/stock_hold_2026-04-16"
-   },
-
+  {
+    title: "Analytical Evaluation Framework",
+    category: "Analytical Modeling",
+    desc: "Comparing model outputs with practical metrics, stability checks, and visual summaries without publishing private project details."
+  },
+  {
+    title: "Risk & Resilience Analysis",
+    category: "Decision Analysis",
+    desc: "Studying downside scenarios, recovery patterns, and robustness questions from a management engineering perspective."
+  },
+  {
+    title: "Python Automation Prototype",
+    category: "Automation",
+    desc: "Building small Python tools to reduce repetitive analysis work, standardize outputs, and make research workflows easier to maintain."
+  },
+  {
+    title: "Visualization & Reporting Workflow",
+    category: "Communication",
+    desc: "Turning analysis results into charts, concise summaries, and presentation-ready explanations for non-technical readers."
+  }
 ];
+
+const skills = [
+  "Python",
+  "Pandas",
+  "NumPy",
+  "Matplotlib",
+  "Data Cleaning",
+  "Data Analysis",
+  "Decision Modeling",
+  "Automation",
+  "Data Visualization",
+  "Research Writing"
+];
+
 ---
 
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>398的美股策略</title>
+    <title>Yufang Lin | Management Engineering & Data Analysis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
@@ -180,21 +197,74 @@ const posts = [
         color: #4b5563;
       }
 
-      .date {
-        font-size: 14px;
-        color: #6b7280;
+      .skills-box,
+      .subscribe-box {
+        margin-top: 54px;
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08);
       }
 
-      .read-more {
-        display: inline-block;
-        margin-top: 16px;
+      .skills-box h2,
+      .subscribe-box h2 {
+        font-size: 24px;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      .skills-box p,
+      .subscribe-box p {
+        color: #4b5563;
+        line-height: 1.8;
+        margin-bottom: 20px;
+      }
+
+      .skill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .skill-list li {
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: #eef2ff;
         color: #1d4ed8;
+        font-size: 14px;
         font-weight: 800;
-        text-decoration: none;
       }
 
-      .read-more:hover {
-        text-decoration: underline;
+      .subscribe-form {
+        display: flex;
+        gap: 12px;
+      }
+
+      .subscribe-form input[type="email"] {
+        flex: 1;
+        min-width: 0;
+        padding: 12px 14px;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        color: #1f2937;
+        font-size: 16px;
+      }
+
+      .subscribe-form button {
+        padding: 12px 18px;
+        border: none;
+        border-radius: 10px;
+        background: #2563eb;
+        color: white;
+        cursor: pointer;
+        font-weight: 800;
+      }
+
+      .subscribe-form button:hover {
+        background: #1d4ed8;
       }
 
       .disclaimer {
@@ -229,77 +299,29 @@ const posts = [
         }
 
         nav a {
+          display: inline-block;
           margin-left: 0;
           margin-right: 18px;
+          margin-bottom: 8px;
         }
 
         .site-title {
           font-size: 36px;
         }
-      }
-            .disclaimer {
-        margin-top: 54px;
-        background: #eef2ff;
-        border-left: 5px solid #2563eb;
-        border-radius: 14px;
-        padding: 22px 26px;
-        line-height: 1.8;
-        color: #374151;
-      }
 
-      /* 订阅框样式放这里 */
-      .subscribe-box {
-        margin-top: 54px;
-        background: white;
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08);
-      }
+        .subscribe-form {
+          display: block;
+        }
 
-      .subscribe-box h2 {
-        font-size: 24px;
-        margin-top: 0;
-        margin-bottom: 10px;
-      }
+        .subscribe-form input[type="email"],
+        .subscribe-form button {
+          width: 100%;
+          box-sizing: border-box;
+        }
 
-      .subscribe-box p {
-        color: #4b5563;
-        line-height: 1.8;
-        margin-bottom: 20px;
-      }
-
-      .subscribe-box form {
-        display: flex;
-        gap: 12px;
-      }
-
-      .subscribe-box input {
-        flex: 1;
-        padding: 12px 14px;
-        border: 1px solid #cbd5e1;
-        border-radius: 10px;
-        font-size: 16px;
-      }
-
-      .subscribe-box button {
-        padding: 12px 18px;
-        border: none;
-        border-radius: 10px;
-        background: #2563eb;
-        color: white;
-        font-weight: 800;
-        cursor: pointer;
-      }
-
-      .subscribe-box button:hover {
-        background: #1d4ed8;
-      }
-
-      footer {
-        text-align: center;
-        color: #6b7280;
-        padding: 42px 20px;
-        font-size: 14px;
+        .subscribe-form button {
+          margin-top: 12px;
+        }
       }
     </style>
   </head>
@@ -307,81 +329,102 @@ const posts = [
   <body>
     <header>
       <nav>
-        <div class="logo">398 的美股策略</div>
+        <div class="logo">Yufang Lin</div>
         <div>
-          <a href="/">首页</a>
-          <a href="/about">关于我</a>
+          <a href="/">Home</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#subscribe">Subscribe</a>
+          <a href="/about">About</a>
         </div>
       </nav>
 
       <section class="hero">
-        <div class="site-title">398的美股策略</div>
+        <div class="site-title">
+          Management Engineering, Data Analysis, Python Workflows, and Decision Modeling
+        </div>
         <div class="subtitle">
-          用数据识别趋势，用规则减少情绪<br />
+          Management Engineering student focused on using data, models, and Python to analyze
+          systems, evaluate decisions, and communicate research clearly.
         </div>
 
         <div class="tags">
-          <span class="tag">美股基本面分析</span>
-          <span class="tag">策略复盘</span>
+          <span class="tag">Management Engineering</span>
+          <span class="tag">Data Analysis</span>
+          <span class="tag">Python</span>
+          <span class="tag">Decision Modeling</span>
         </div>
       </section>
     </header>
 
     <main>
       <section class="intro">
-        <h1>简介</h1>
+        <h1>About This Portfolio</h1>
         <p>
-    这是一个记录美股科技股研究、纳斯达克市场观察和量化策略复盘的网站。
+          I am building this site as a personal portfolio for management engineering projects,
+          data analysis, decision modeling, and Python-based project notes. Some project details
+          are intentionally summarized at a high level, so the site can show my working style
+          without publishing private methods or sensitive research logic.
         </p>
       </section>
 
-      <h1 class="section-title">最新文章</h1>
+      <h1 id="projects" class="section-title">Projects</h1>
 
       <section class="grid">
-        {posts.map((post) => (
+        {projects.map((project) => (
           <article class="card">
-            <div class="category">{post.category}</div>
-            <h2>{post.title}</h2>
-            <div class="date">{post.date}</div>
-            <p>{post.desc}</p>
-            <a class="read-more" href={post.link}>阅读全文 →</a>
+            <div class="category">{project.category}</div>
+            <h2>{project.title}</h2>
+            <p>{project.desc}</p>
           </article>
         ))}
       </section>
-      
-      <section class="subscribe-box">
-        <h2>订阅我的美股策略更新</h2>
-        <p>输入邮箱后，当发布新的市场观察或调仓记录时，你会收到邮件提醒。</p>
+
+      <section id="skills" class="skills-box">
+        <h2>Skills</h2>
+        <p>
+          Tools and research areas I use to turn complex questions into testable analysis.
+        </p>
+        <ul class="skill-list">
+          {skills.map((skill) => (
+            <li>{skill}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="subscribe" class="subscribe-box">
+        <h2>Subscribe</h2>
+        <p>
+          Get occasional updates when I publish new notes, project summaries, or learning records.
+        </p>
 
         <form
           action="https://buttondown.com/api/emails/embed-subscribe/yufang"
           method="post"
           target="_blank"
-          class="embeddable-buttondown-form"
+          class="subscribe-form"
         >
           <input
             type="email"
             name="email"
             id="bd-email"
-            placeholder="请输入你的邮箱"
+            placeholder="Enter your email"
             required
           />
-
           <input type="hidden" name="embed" value="1" />
-
-          <button type="submit">订阅更新</button>
+          <button type="submit">Subscribe</button>
         </form>
       </section>
 
       <section class="disclaimer">
-        <strong>风险提示：</strong>
-        本网站所有内容仅为个人投研记录，不构成任何证券投资建议，
-        不作为买入、卖出或持有任何证券的依据。投资有风险，入市需谨慎。
+        <strong>Note:</strong>
+        This portfolio is for personal research, learning, and project documentation only. Project
+        descriptions are intentionally high-level and do not publish private methods.
       </section>
     </main>
 
     <footer>
-      © 2026 398的美股策略 ｜ 个人投研记录，不构成投资建议
+      (c) 2026 Yufang Lin | Management Engineering & Data Analysis
     </footer>
   </body>
 </html>
