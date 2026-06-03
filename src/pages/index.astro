@@ -1,51 +1,33 @@
 ---
-const projects = [
+const sections = [
   {
-    title: "Data Analysis Research Notebook",
-    category: "Research Workflow",
-    desc: "Organizing datasets, assumptions, and evaluation notes into a clear research process that can be reviewed and improved over time."
+    title: "目前持仓",
+    category: "持仓记录",
+    desc: "记录当前持仓列表、持仓状态和后续观察重点。具体仓位和成本可按需要逐步补充。",
+    link: "/holdings/",
+    cta: "查看持仓"
   },
   {
-    title: "Analytical Evaluation Framework",
-    category: "Analytical Modeling",
-    desc: "Comparing model outputs with practical metrics, stability checks, and visual summaries without publishing private project details."
+    title: "投资报告分析",
+    category: "投研分析",
+    desc: "整理投资报告、行业观察和对持仓逻辑的理解，方便把研究过程沉淀下来。",
+    link: "/reports/",
+    cta: "查看报告"
   },
   {
-    title: "Risk & Resilience Analysis",
-    category: "Decision Analysis",
-    desc: "Studying downside scenarios, recovery patterns, and robustness questions from a management engineering perspective."
-  },
-  {
-    title: "Python Automation Prototype",
-    category: "Automation",
-    desc: "Building small Python tools to reduce repetitive analysis work, standardize outputs, and make research workflows easier to maintain."
-  },
-  {
-    title: "Visualization & Reporting Workflow",
-    category: "Communication",
-    desc: "Turning analysis results into charts, concise summaries, and presentation-ready explanations for non-technical readers."
+    title: "历史持仓收益",
+    category: "收益复盘",
+    desc: "复盘过去持仓区间的表现，记录收益、回撤、主要贡献和需要改进的地方。",
+    link: "/history/",
+    cta: "查看收益"
   }
 ];
-
-const skills = [
-  "Python",
-  "Pandas",
-  "NumPy",
-  "Matplotlib",
-  "Data Cleaning",
-  "Data Analysis",
-  "Decision Modeling",
-  "Automation",
-  "Data Visualization",
-  "Research Writing"
-];
-
 ---
 
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <title>Yufang Lin | Management Engineering & Data Analysis</title>
+    <title>398的美股策略</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
@@ -63,11 +45,9 @@ const skills = [
             rgba(15, 23, 42, 0.75)
           ),
           url("/images/hero-bg.jpg");
-
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-
         color: white;
         padding: 56px 10% 72px;
       }
@@ -136,7 +116,8 @@ const skills = [
         padding: 0 24px;
       }
 
-      .intro {
+      .intro,
+      .subscribe-box {
         background: white;
         border-radius: 20px;
         padding: 30px;
@@ -145,12 +126,14 @@ const skills = [
         line-height: 1.9;
       }
 
-      .intro h1 {
+      .intro h1,
+      .subscribe-box h2 {
         font-size: 28px;
         margin-top: 0;
       }
 
-      .intro p {
+      .intro p,
+      .subscribe-box p {
         color: #4b5563;
       }
 
@@ -187,7 +170,7 @@ const skills = [
       }
 
       .card h2 {
-        font-size: 22px;
+        font-size: 24px;
         line-height: 1.45;
         margin: 8px 0 10px;
       }
@@ -197,45 +180,21 @@ const skills = [
         color: #4b5563;
       }
 
-      .skills-box,
+      .card-link {
+        display: inline-block;
+        margin-top: 18px;
+        color: #1d4ed8;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .card-link:hover {
+        text-decoration: underline;
+      }
+
       .subscribe-box {
         margin-top: 54px;
-        background: white;
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08);
-      }
-
-      .skills-box h2,
-      .subscribe-box h2 {
-        font-size: 24px;
-        margin-top: 0;
-        margin-bottom: 10px;
-      }
-
-      .skills-box p,
-      .subscribe-box p {
-        color: #4b5563;
-        line-height: 1.8;
-        margin-bottom: 20px;
-      }
-
-      .skill-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-      }
-
-      .skill-list li {
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: #eef2ff;
-        color: #1d4ed8;
-        font-size: 14px;
-        font-weight: 800;
+        margin-bottom: 0;
       }
 
       .subscribe-form {
@@ -329,74 +288,56 @@ const skills = [
   <body>
     <header>
       <nav>
-        <div class="logo">Yufang Lin</div>
+        <div class="logo">398的美股策略</div>
         <div>
-          <a href="/">Home</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#subscribe">Subscribe</a>
-          <a href="/about">About</a>
+          <a href="/">首页</a>
+          <a href="/holdings/">目前持仓</a>
+          <a href="/reports/">投资报告</a>
+          <a href="/history/">历史收益</a>
+          <a href="#subscribe">订阅</a>
         </div>
       </nav>
 
       <section class="hero">
-        <div class="site-title">
-          Management Engineering, Data Analysis, Python Workflows, and Decision Modeling
-        </div>
+        <div class="site-title">398的美股策略</div>
         <div class="subtitle">
-          Management Engineering student focused on using data, models, and Python to analyze
-          systems, evaluate decisions, and communicate research clearly.
+          记录美股持仓、投资报告、持仓理解和历史收益复盘。
         </div>
 
         <div class="tags">
-          <span class="tag">Management Engineering</span>
-          <span class="tag">Data Analysis</span>
-          <span class="tag">Python</span>
-          <span class="tag">Decision Modeling</span>
+          <span class="tag">目前持仓</span>
+          <span class="tag">投资报告分析</span>
+          <span class="tag">历史持仓收益</span>
+          <span class="tag">长期跟踪</span>
         </div>
       </section>
     </header>
 
     <main>
       <section class="intro">
-        <h1>About This Portfolio</h1>
+        <h1>网站说明</h1>
         <p>
-          I am building this site as a personal portfolio for management engineering projects,
-          data analysis, decision modeling, and Python-based project notes. Some project details
-          are intentionally summarized at a high level, so the site can show my working style
-          without publishing private methods or sensitive research logic.
+          这里主要用来整理个人投研记录。首页只放入口，具体内容会分到不同栏目里，
+          以后内容变多后，每个栏目都可以继续按页展示。
         </p>
       </section>
 
-      <h1 id="projects" class="section-title">Projects</h1>
+      <h1 id="sections" class="section-title">内容板块</h1>
 
       <section class="grid">
-        {projects.map((project) => (
+        {sections.map((section) => (
           <article class="card">
-            <div class="category">{project.category}</div>
-            <h2>{project.title}</h2>
-            <p>{project.desc}</p>
+            <div class="category">{section.category}</div>
+            <h2>{section.title}</h2>
+            <p>{section.desc}</p>
+            <a class="card-link" href={section.link}>{section.cta} →</a>
           </article>
         ))}
       </section>
 
-      <section id="skills" class="skills-box">
-        <h2>Skills</h2>
-        <p>
-          Tools and research areas I use to turn complex questions into testable analysis.
-        </p>
-        <ul class="skill-list">
-          {skills.map((skill) => (
-            <li>{skill}</li>
-          ))}
-        </ul>
-      </section>
-
       <section id="subscribe" class="subscribe-box">
-        <h2>Subscribe</h2>
-        <p>
-          Get occasional updates when I publish new notes, project summaries, or learning records.
-        </p>
+        <h2>订阅更新</h2>
+        <p>输入邮箱后，后续发布新的持仓记录、投资报告或收益复盘时，可以收到邮件更新。</p>
 
         <form
           action="https://buttondown.com/api/emails/embed-subscribe/yufang"
@@ -408,23 +349,23 @@ const skills = [
             type="email"
             name="email"
             id="bd-email"
-            placeholder="Enter your email"
+            placeholder="请输入你的邮箱"
             required
           />
           <input type="hidden" name="embed" value="1" />
-          <button type="submit">Subscribe</button>
+          <button type="submit">订阅</button>
         </form>
       </section>
 
       <section class="disclaimer">
-        <strong>Note:</strong>
-        This portfolio is for personal research, learning, and project documentation only. Project
-        descriptions are intentionally high-level and do not publish private methods.
+        <strong>风险提示：</strong>
+        本网站内容仅为个人记录和学习复盘，不构成任何投资建议，也不作为买入、
+        卖出或持有任何证券的依据。投资有风险，入市需谨慎。
       </section>
     </main>
 
     <footer>
-      (c) 2026 Yufang Lin | Management Engineering & Data Analysis
+      © 2026 398的美股策略 ｜ 个人投研记录，不构成投资建议
     </footer>
   </body>
 </html>

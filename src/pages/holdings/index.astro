@@ -1,0 +1,84 @@
+---
+const articles = [
+  {
+    title: "当前持仓总览",
+    date: "持续更新",
+    desc: "用于集中记录当前持有股票、持仓状态和后续观察重点。",
+    link: "/holdings/current-portfolio/"
+  },
+  {
+    title: "持仓观察模板",
+    date: "模板",
+    desc: "以后新增个股持仓理解时，可以按这个结构补充逻辑、风险和跟踪指标。",
+    link: "/holdings/position-note-template/"
+  }
+];
+---
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>目前持仓 - 398的美股策略</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f5f7fb; color: #1f2937; }
+      header { background: linear-gradient(135deg, #0f172a, #1e3a8a); color: white; padding: 28px 10%; }
+      nav { display: flex; justify-content: space-between; align-items: center; }
+      .logo { font-size: 20px; font-weight: 800; }
+      nav a { color: white; text-decoration: none; margin-left: 24px; font-weight: 600; }
+      main { max-width: 1040px; margin: 56px auto; padding: 0 24px; }
+      .hero, .card, .pagination { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08); }
+      .hero { margin-bottom: 28px; }
+      h1 { margin-top: 0; font-size: 34px; }
+      p { color: #4b5563; line-height: 1.8; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px; }
+      .meta { color: #1d4ed8; font-size: 14px; font-weight: 800; }
+      .card h2 { margin: 10px 0; font-size: 22px; }
+      .card a { color: #1d4ed8; font-weight: 800; text-decoration: none; }
+      .pagination { margin-top: 32px; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #4b5563; }
+      .page-link { color: #2563eb; font-weight: 800; text-decoration: none; }
+      .disabled { color: #9ca3af; }
+      footer { text-align: center; color: #6b7280; padding: 42px 20px; font-size: 14px; }
+      @media (max-width: 700px) { nav { display: block; } nav div:last-child { margin-top: 16px; } nav a { display: inline-block; margin-left: 0; margin-right: 18px; margin-bottom: 8px; } .pagination { display: block; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">398的美股策略</div>
+        <div>
+          <a href="/">首页</a>
+          <a href="/holdings/">目前持仓</a>
+          <a href="/reports/">投资报告</a>
+          <a href="/history/">历史收益</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>目前持仓</h1>
+        <p>这里用于展示当前持有股票和持仓理解。真实仓位、成本和比例可以以后逐步补充。</p>
+      </section>
+
+      <section class="grid">
+        {articles.map((article) => (
+          <article class="card">
+            <div class="meta">{article.date}</div>
+            <h2>{article.title}</h2>
+            <p>{article.desc}</p>
+            <a href={article.link}>阅读全文 →</a>
+          </article>
+        ))}
+      </section>
+
+      <section class="pagination">
+        <span class="disabled">上一页</span>
+        <strong>第 1 页 / 共 1 页</strong>
+        <span class="disabled">下一页（后续内容增加后启用）</span>
+      </section>
+    </main>
+
+    <footer>© 2026 398的美股策略 ｜ 个人投研记录，不构成投资建议</footer>
+  </body>
+</html>

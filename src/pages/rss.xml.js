@@ -2,27 +2,27 @@ import rss from '@astrojs/rss';
 
 export function GET(context) {
   return rss({
-    title: '猫捂京的美股投策',
-    description: '美股科技股研究、纳斯达克市场观察和量化策略复盘',
+    title: '398的美股策略',
+    description: '记录美股持仓、投资报告分析和历史持仓收益复盘。',
     site: context.site,
     items: [
       {
-        title: '本周美股科技股观察：AI算力主线仍然强势',
+        title: '美股科技板块观察：AI算力主线仍需结合估值和盈利验证',
         pubDate: new Date('2026-05-24'),
-        description: '从AI算力、半导体、云计算、数据中心、宏观利率和估值风险等角度复盘本周美股科技股表现。',
-        link: '/articles/ai-computing-2026-05-24/',
+        description: '从行业趋势、估值压力和盈利兑现三个角度整理一篇投资报告。',
+        link: '/articles/us-tech-weekly-2026-05-24/',
       },
       {
-        title: '2026-05-14 调仓收益记录',
+        title: '2026-05-14 持仓收益记录',
         pubDate: new Date('2026-05-14'),
-        description: '本次调仓收益记录。',
-        link: '/articles/rebalance-2026-05-14/',
+        description: '记录 2026-04-17 至 2026-05-14 这一轮持仓收益表现。',
+        link: '/articles/stock_hold_2026-05-14/',
       },
       {
-        title: '2026-04-16 调仓收益记录',
+        title: '2026-04-16 持仓收益记录',
         pubDate: new Date('2026-04-16'),
-        description: '本次调仓收益记录。',
-        link: '/articles/rebalance-2026-04-16/',
+        description: '记录 2026-03-19 至 2026-04-16 这一轮持仓收益表现。',
+        link: '/articles/stock_hold_2026-04-16/',
       },
     ],
   });
