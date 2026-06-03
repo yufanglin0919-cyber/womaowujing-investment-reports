@@ -1,7 +1,11 @@
+---
+import { SITE_DISCLAIMER } from "../consts";
+---
+
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <title>关于本站 - 398的美股策略</title>
+    <title>关于本站 - 398的美股策略｜美股科技投研</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
@@ -41,7 +45,8 @@
       }
 
       .warning {
-        background: #f1f5f9;
+        background: #eef2ff;
+        border-left: 5px solid #2563eb;
         padding: 18px;
         border-radius: 12px;
         color: #475569;
@@ -57,11 +62,11 @@
         <h1>关于本站</h1>
 
         <p>
-          这里是“398的美股策略”的内容整理页，主要记录持仓、投资报告和历史收益复盘。
+          “398的美股策略｜美股科技投研”用于整理美股科技公司研究、行业主题观察、策略历史复盘和财报跟踪。本站面向中文读者，重点放在研究框架和风险意识，不写过度个人化介绍。
         </p>
 
         <div class="warning">
-          本网站内容仅为个人记录和学习复盘，不构成任何投资建议。
+          {SITE_DISCLAIMER}
         </div>
       </div>
     </main>

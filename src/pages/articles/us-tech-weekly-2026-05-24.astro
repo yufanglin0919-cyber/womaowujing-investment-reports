@@ -1,7 +1,11 @@
+---
+import { SITE_DISCLAIMER } from "../../consts";
+---
+
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <title>美股科技板块观察：AI算力主线仍需结合估值和盈利验证 - 398的美股策略</title>
+    <title>美股科技板块观察：AI 算力主线仍需结合估值和盈利验证 - 398的美股策略｜美股科技投研</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f5f7fb; color: #1f2937; }
@@ -9,13 +13,17 @@
       nav { display: flex; justify-content: space-between; align-items: center; }
       .logo { font-size: 20px; font-weight: 800; }
       nav a { color: white; text-decoration: none; margin-left: 24px; font-weight: 600; }
-      article { max-width: 880px; margin: 56px auto; padding: 0 24px; line-height: 1.9; }
+      article { max-width: 920px; margin: 56px auto; padding: 0 24px; line-height: 1.9; }
       .content { background: white; padding: 38px; border-radius: 20px; box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08); }
       h1 { font-size: 34px; line-height: 1.35; margin-top: 0; }
       h2 { margin-top: 36px; font-size: 24px; }
-      p, li { color: #4b5563; }
+      p, li, td, th { color: #4b5563; }
       li { margin-bottom: 10px; }
       .meta { color: #6b7280; font-size: 14px; margin-bottom: 28px; }
+      .table-wrap { width: 100%; overflow-x: auto; }
+      table { width: 100%; border-collapse: collapse; margin-top: 18px; min-width: 640px; }
+      th, td { border-bottom: 1px solid #e5e7eb; padding: 12px 10px; text-align: left; }
+      th { color: #1f2937; background: #eef2ff; }
       .back { display: inline-block; margin-bottom: 22px; color: #2563eb; text-decoration: none; font-weight: 800; }
       .disclaimer { margin-top: 40px; padding: 20px 24px; background: #eef2ff; border-left: 5px solid #2563eb; border-radius: 14px; color: #374151; }
       footer { text-align: center; color: #6b7280; padding: 42px 20px; font-size: 14px; }
@@ -26,12 +34,13 @@
   <body>
     <header>
       <nav>
-        <div class="logo">398的美股策略</div>
+        <div class="logo">398的美股策略｜美股科技投研</div>
         <div>
           <a href="/">首页</a>
-          <a href="/holdings/">目前持仓</a>
+          <a href="/holdings/">研究跟踪池</a>
           <a href="/reports/">投资报告</a>
-          <a href="/history/">历史收益</a>
+          <a href="/history/">历史复盘</a>
+          <a href="/subscribe/">订阅说明</a>
         </div>
       </nav>
     </header>
@@ -40,41 +49,75 @@
       <a class="back" href="/reports/">← 返回投资报告</a>
 
       <section class="content">
-        <h1>美股科技板块观察：AI算力主线仍需结合估值和盈利验证</h1>
-        <p class="meta">2026-05-24 ｜ 投资报告分析 ｜ 科技板块观察</p>
+        <h1>美股科技板块观察：AI 算力主线仍需结合估值和盈利验证</h1>
+        <p class="meta">2026-05-24 ｜ 免费样本报告 ｜ 科技板块观察</p>
 
-        <h2>1. 核心观察</h2>
+        <h2>1. 一句话结论</h2>
         <p>
-          近期美股科技板块仍然围绕 AI 算力、云计算、半导体和数据中心展开。这个方向的长期逻辑仍然清晰，
-          但短期价格已经反映了不少乐观预期，因此后续不能只看行业故事，也要看公司业绩是否兑现。
+          AI、半导体、云计算和数据中心仍是美股科技成长的重要主线，但报告判断需要同时接受财报兑现、估值位置和风险清单的验证。
         </p>
 
-        <h2>2. 需要重点跟踪的问题</h2>
+        <h2>2. 核心数据表</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>指标</th>
+                <th>当前观察</th>
+                <th>后续处理</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>收入增速</td><td>待补充具体公司数据</td><td>按最新财报更新</td></tr>
+              <tr><td>利润</td><td>待补充具体公司数据</td><td>关注利润率是否改善</td></tr>
+              <tr><td>现金流</td><td>待补充具体公司数据</td><td>观察自由现金流质量</td></tr>
+              <tr><td>估值</td><td>待补充具体公司数据</td><td>与历史区间和同业对比</td></tr>
+              <tr><td>毛利率</td><td>待补充具体公司数据</td><td>观察竞争压力和产品结构</td></tr>
+              <tr><td>ROE</td><td>待补充具体公司数据</td><td>结合资产效率分析</td></tr>
+              <tr><td>债务</td><td>待补充具体公司数据</td><td>关注偿债压力和利息费用</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>3. 行业逻辑</h2>
+        <p>
+          美股科技板块的核心变量仍集中在 AI 基础设施投入、半导体供应链、云计算需求、软件效率工具和数据中心建设。
+          行业长期空间清晰，但市场预期已经较高，因此需要持续验证需求是否转化为收入、利润和现金流。
+        </p>
+
+        <h2>4. 公司逻辑</h2>
+        <p>
+          后续公司报告会把单家公司拆成业务结构、增长来源、利润质量、现金流质量和管理层指引。
+          本篇作为主题样本，不填入未经核实的单家公司财务数字。
+        </p>
+
+        <h2>5. 估值位置</h2>
+        <p>
+          科技成长公司容易受到利率、风险偏好和盈利预期变化影响。估值判断需要同时看历史区间、同业对比、增速变化和利润兑现质量。
+        </p>
+
+        <h2>6. 风险清单</h2>
         <ul>
-          <li>相关公司收入增长是否能持续。</li>
-          <li>资本开支是否转化为真实利润和现金流。</li>
-          <li>估值是否已经提前反映未来几年的高增长。</li>
-          <li>利率、通胀和市场风险偏好是否出现变化。</li>
+          <li>AI 相关资本开支转化为真实收入和利润的速度低于预期。</li>
+          <li>云计算或软件客户预算收缩，影响收入增速。</li>
+          <li>估值已经提前反映未来数年的高增长。</li>
+          <li>利率、通胀或市场风险偏好变化导致成长板块估值承压。</li>
         </ul>
 
-        <h2>3. 对持仓理解的作用</h2>
-        <p>
-          投资报告不是为了预测短期涨跌，而是帮助自己确认持仓逻辑是否还成立。如果行业趋势仍在，
-          但估值过高或业绩验证不足，就需要在仓位和风险控制上更谨慎。
-        </p>
+        <h2>7. 后续跟踪指标</h2>
+        <ul>
+          <li>重点公司的收入增速、毛利率、自由现金流和管理层指引。</li>
+          <li>云厂商资本开支、数据中心建设进度和半导体供应链交付情况。</li>
+          <li>QQQ、Nasdaq 100 和 SPY 的相对表现，以及科技板块内部扩散情况。</li>
+        </ul>
 
-        <h2>4. 后续记录方式</h2>
-        <p>
-          后续可以继续把报告拆成行业观察、个股理解和财报复盘三类内容，避免所有分析都堆在一篇文章里。
-        </p>
-
+        <h2>8. 免责声明</h2>
         <div class="disclaimer">
-          <strong>风险提示：</strong>
-          本文仅为个人投研记录，不构成任何投资建议，也不作为买入、卖出或持有任何证券的依据。
+          {SITE_DISCLAIMER}
         </div>
       </section>
     </article>
 
-    <footer>© 2026 398的美股策略 ｜ 个人投研记录，不构成投资建议</footer>
+    <footer>© 2026 398的美股策略｜美股科技投研</footer>
   </body>
 </html>

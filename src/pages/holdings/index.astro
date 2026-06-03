@@ -1,15 +1,15 @@
 ---
 const articles = [
   {
-    title: "当前持仓总览",
+    title: "研究跟踪总览",
     date: "持续更新",
-    desc: "用于集中记录当前持有股票、持仓状态和后续观察重点。",
+    desc: "集中记录正在跟踪的美股科技公司和主题方向，重点看公司逻辑、财报变化、风险变化、估值观察和后续跟踪指标。",
     link: "/holdings/current-portfolio/"
   },
   {
-    title: "持仓观察模板",
+    title: "研究跟踪记录模板",
     date: "模板",
-    desc: "以后新增个股持仓理解时，可以按这个结构补充逻辑、风险和跟踪指标。",
+    desc: "以后新增公司或主题记录时，可以按这个结构补充研究逻辑、核心指标、风险清单和更新节点。",
     link: "/holdings/position-note-template/"
   }
 ];
@@ -18,7 +18,7 @@ const articles = [
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <title>目前持仓 - 398的美股策略</title>
+    <title>研究跟踪池 - 398的美股策略｜美股科技投研</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f5f7fb; color: #1f2937; }
@@ -27,7 +27,7 @@ const articles = [
       .logo { font-size: 20px; font-weight: 800; }
       nav a { color: white; text-decoration: none; margin-left: 24px; font-weight: 600; }
       main { max-width: 1040px; margin: 56px auto; padding: 0 24px; }
-      .hero, .card, .pagination { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08); }
+      .hero, .card, .pagination, .note { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08); }
       .hero { margin-bottom: 28px; }
       h1 { margin-top: 0; font-size: 34px; }
       p { color: #4b5563; line-height: 1.8; }
@@ -35,8 +35,8 @@ const articles = [
       .meta { color: #1d4ed8; font-size: 14px; font-weight: 800; }
       .card h2 { margin: 10px 0; font-size: 22px; }
       .card a { color: #1d4ed8; font-weight: 800; text-decoration: none; }
+      .note { margin-top: 28px; background: #eef2ff; border-left: 5px solid #2563eb; box-shadow: none; }
       .pagination { margin-top: 32px; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #4b5563; }
-      .page-link { color: #2563eb; font-weight: 800; text-decoration: none; }
       .disabled { color: #9ca3af; }
       footer { text-align: center; color: #6b7280; padding: 42px 20px; font-size: 14px; }
       @media (max-width: 700px) { nav { display: block; } nav div:last-child { margin-top: 16px; } nav a { display: inline-block; margin-left: 0; margin-right: 18px; margin-bottom: 8px; } .pagination { display: block; } }
@@ -45,20 +45,23 @@ const articles = [
   <body>
     <header>
       <nav>
-        <div class="logo">398的美股策略</div>
+        <div class="logo">398的美股策略｜美股科技投研</div>
         <div>
           <a href="/">首页</a>
-          <a href="/holdings/">目前持仓</a>
+          <a href="/holdings/">研究跟踪池</a>
           <a href="/reports/">投资报告</a>
-          <a href="/history/">历史收益</a>
+          <a href="/history/">历史复盘</a>
+          <a href="/subscribe/">订阅说明</a>
         </div>
       </nav>
     </header>
 
     <main>
       <section class="hero">
-        <h1>目前持仓</h1>
-        <p>这里用于展示当前持有股票和持仓理解。真实仓位、成本和比例可以以后逐步补充。</p>
+        <h1>研究跟踪池</h1>
+        <p>
+          这里用于记录正在跟踪的美股科技公司和主题方向，主要展示公司逻辑、财报变化、风险变化、估值观察和后续跟踪指标。
+        </p>
       </section>
 
       <section class="grid">
@@ -72,6 +75,12 @@ const articles = [
         ))}
       </section>
 
+      <section class="note">
+        <p>
+          研究跟踪池只用于公开整理研究线索和后续观察重点，不展示个人账户信息，也不构成任何证券操作建议或个性化投资建议。
+        </p>
+      </section>
+
       <section class="pagination">
         <span class="disabled">上一页</span>
         <strong>第 1 页 / 共 1 页</strong>
@@ -79,6 +88,6 @@ const articles = [
       </section>
     </main>
 
-    <footer>© 2026 398的美股策略 ｜ 个人投研记录，不构成投资建议</footer>
+    <footer>© 2026 398的美股策略｜美股科技投研</footer>
   </body>
 </html>

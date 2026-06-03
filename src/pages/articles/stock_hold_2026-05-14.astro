@@ -1,7 +1,11 @@
+---
+import { SITE_DISCLAIMER } from "../../consts";
+---
+
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <title>2026-05-14 持仓收益记录 - 398的美股策略</title>
+    <title>2026-05-14 策略复盘 - 398的美股策略｜美股科技投研</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f5f7fb; color: #1f2937; }
@@ -9,83 +13,105 @@
       nav { display: flex; justify-content: space-between; align-items: center; }
       .logo { font-size: 20px; font-weight: 800; }
       nav a { color: white; text-decoration: none; margin-left: 24px; font-weight: 600; }
-      article { max-width: 900px; margin: 56px auto; padding: 0 24px; line-height: 1.9; }
+      article { max-width: 940px; margin: 56px auto; padding: 0 24px; line-height: 1.9; }
       .content { background: white; padding: 38px; border-radius: 20px; box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08); }
       h1 { font-size: 34px; line-height: 1.35; margin-top: 0; }
       h2 { margin-top: 36px; font-size: 24px; }
-      p, td, th { color: #4b5563; }
-      table { width: 100%; border-collapse: collapse; margin-top: 18px; }
-      th, td { border-bottom: 1px solid #e5e7eb; padding: 12px 10px; text-align: left; }
+      p, td, th, li { color: #4b5563; }
+      .table-wrap { width: 100%; overflow-x: auto; }
+      table { width: 100%; border-collapse: collapse; margin-top: 18px; min-width: 720px; }
+      th, td { border-bottom: 1px solid #e5e7eb; padding: 12px 10px; text-align: left; vertical-align: top; }
       th { color: #1f2937; background: #eef2ff; }
       .meta { color: #6b7280; font-size: 14px; margin-bottom: 28px; }
       .back { display: inline-block; margin-bottom: 22px; color: #2563eb; text-decoration: none; font-weight: 800; }
       .disclaimer { margin-top: 40px; padding: 20px 24px; background: #eef2ff; border-left: 5px solid #2563eb; border-radius: 14px; color: #374151; }
       footer { text-align: center; color: #6b7280; padding: 42px 20px; font-size: 14px; }
-      @media (max-width: 700px) { nav { display: block; } nav div:last-child { margin-top: 16px; } nav a { display: inline-block; margin-left: 0; margin-right: 18px; margin-bottom: 8px; } table { font-size: 14px; } .content { padding: 28px; } }
+      @media (max-width: 700px) { nav { display: block; } nav div:last-child { margin-top: 16px; } nav a { display: inline-block; margin-left: 0; margin-right: 18px; margin-bottom: 8px; } .content { padding: 28px; } }
     </style>
   </head>
 
   <body>
     <header>
       <nav>
-        <div class="logo">398的美股策略</div>
+        <div class="logo">398的美股策略｜美股科技投研</div>
         <div>
           <a href="/">首页</a>
-          <a href="/holdings/">目前持仓</a>
+          <a href="/holdings/">研究跟踪池</a>
           <a href="/reports/">投资报告</a>
-          <a href="/history/">历史收益</a>
+          <a href="/history/">历史复盘</a>
+          <a href="/subscribe/">订阅说明</a>
         </div>
       </nav>
     </header>
 
     <article>
-      <a class="back" href="/history/">← 返回历史收益</a>
+      <a class="back" href="/history/">← 返回历史复盘</a>
 
       <section class="content">
-        <h1>2026-05-14 持仓收益记录</h1>
-        <p class="meta">2026-05-14 ｜ 历史持仓收益</p>
+        <h1>2026-05-14 策略复盘</h1>
+        <p class="meta">2026-05-14 ｜ 复盘区间：2026-04-17 至 2026-05-14</p>
 
-        <h2>1. 持仓区间</h2>
-        <p>本次记录区间为 2026-04-17 至 2026-05-14，用于复盘这一轮持仓的区间表现。</p>
+        <h2>1. 固定复盘指标</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>指标</th>
+                <th>结果</th>
+                <th>说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>策略收益</td><td>+33.48%</td><td>等权组合收益。</td></tr>
+              <tr><td>基准收益</td><td>待补充</td><td>QQQ / Nasdaq 100 / SPY 同期收益待补充。</td></tr>
+              <tr><td>超额收益</td><td>待补充</td><td>策略收益减去基准收益。</td></tr>
+              <tr><td>最大回撤</td><td>待补充</td><td>该轮期间最大回撤待补充。</td></tr>
+              <tr><td>胜率</td><td>4/5</td><td>五个样本中四个为正收益。</td></tr>
+              <tr><td>交易成本</td><td>待补充</td><td>是否扣除手续费和滑点需要在正式口径中标注。</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-        <h2>2. 个股表现</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>股票代码</th>
-              <th>期初价格</th>
-              <th>期末价格</th>
-              <th>区间收益</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>DOCN</td><td>85.63</td><td>158.40</td><td>+84.98%</td></tr>
-            <tr><td>NXT</td><td>111.39</td><td>142.75</td><td>+28.15%</td></tr>
-            <tr><td>AKAM</td><td>95.89</td><td>155.67</td><td>+62.34%</td></tr>
-            <tr><td>LMT</td><td>592.19</td><td>520.41</td><td>-12.12%</td></tr>
-            <tr><td>NEE</td><td>91.98</td><td>95.68</td><td>+4.02%</td></tr>
-          </tbody>
-        </table>
+        <h2>2. 样本表现</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>股票代码</th>
+                <th>期初价格</th>
+                <th>期末价格</th>
+                <th>区间收益</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>DOCN</td><td>85.63</td><td>158.40</td><td>+84.98%</td><td>主要贡献项，具体原因待补充。</td></tr>
+              <tr><td>NXT</td><td>111.39</td><td>142.75</td><td>+28.15%</td><td>正收益，后续补充逻辑验证。</td></tr>
+              <tr><td>AKAM</td><td>95.89</td><td>155.67</td><td>+62.34%</td><td>主要贡献项，具体原因待补充。</td></tr>
+              <tr><td>LMT</td><td>592.19</td><td>520.41</td><td>-12.12%</td><td>表现较弱，需要重点复盘。</td></tr>
+              <tr><td>NEE</td><td>91.98</td><td>95.68</td><td>+4.02%</td><td>小幅正收益，贡献有限。</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-        <h2>3. 复盘结论</h2>
+        <h2>3. 持仓逻辑</h2>
         <p>
-          本轮等权平均收益约为 <strong>33.48%</strong>。主要正收益来自 DOCN 和 AKAM，
-          LMT 出现回撤，说明组合内部仍然存在明显分化。
+          本轮历史样本来自当时的组合记录。正式复盘需要补充当时为什么选择这些公司、对应的主题方向、核心财报指标和风险假设。
         </p>
 
-        <h2>4. 后续改进</h2>
+        <h2>4. 错误复盘</h2>
         <p>
-          后续复盘时可以继续记录：收益主要来自哪些股票、回撤来自哪里、是否需要调整持仓权重，
-          以及原本的持仓逻辑是否仍然成立。
+          LMT 在本轮表现不佳，后续需要补充原因：是公司基本面、估值变化、行业预期、宏观环境，还是样本选择与科技成长主题不够一致。
+          这部分会作为后续策略改进的重点。
         </p>
 
+        <h2>5. 免责声明</h2>
         <div class="disclaimer">
-          <strong>风险提示：</strong>
-          本文仅为个人投研记录，不构成任何投资建议，也不作为买入、卖出或持有任何证券的依据。
+          {SITE_DISCLAIMER}
         </div>
       </section>
     </article>
 
-    <footer>© 2026 398的美股策略 ｜ 个人投研记录，不构成投资建议</footer>
+    <footer>© 2026 398的美股策略｜美股科技投研</footer>
   </body>
 </html>
