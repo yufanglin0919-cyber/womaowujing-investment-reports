@@ -11,11 +11,6 @@ const entries = [
     title: "历史持仓与盈亏",
     desc: "记录历史持仓、换仓日期和阶段盈亏表现。",
     link: "/holdings/"
-  },
-  {
-    title: "订阅更新",
-    desc: "订阅网站更新，获取最新研报、观点和持仓复盘提醒。",
-    link: "#subscribe"
   }
 ];
 ---
@@ -29,9 +24,9 @@ const entries = [
     <style>
       :root {
         color-scheme: light;
-        font-family: Arial, "Microsoft YaHei", sans-serif;
+        font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
         color: #111827;
-        background: #ffffff;
+        background: #f5f7fb;
       }
 
       * {
@@ -40,7 +35,7 @@ const entries = [
 
       body {
         margin: 0;
-        background: #ffffff;
+        background: #f5f7fb;
       }
 
       a {
@@ -48,8 +43,8 @@ const entries = [
       }
 
       header {
-        min-height: 520px;
-        padding: 32px clamp(24px, 8vw, 128px) 72px;
+        min-height: 480px;
+        padding: 32px clamp(24px, 8vw, 128px) 64px;
         color: #ffffff;
         background-image:
           linear-gradient(rgba(9, 16, 29, 0.68), rgba(9, 16, 29, 0.74)),
@@ -92,13 +87,13 @@ const entries = [
 
       .hero {
         max-width: 780px;
-        margin-top: 132px;
+        margin-top: 116px;
       }
 
       h1 {
         margin: 0;
-        font-size: clamp(42px, 6vw, 68px);
-        line-height: 1.12;
+        font-size: clamp(40px, 5.4vw, 62px);
+        line-height: 1.16;
         font-weight: 800;
         letter-spacing: 0;
       }
@@ -114,46 +109,60 @@ const entries = [
       main {
         width: min(1040px, calc(100% - 48px));
         margin: 0 auto;
-        padding: 80px 0;
+        padding: 56px 0 76px;
       }
 
       .entries {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        border-top: 1px solid #dfe3e8;
-        border-bottom: 1px solid #dfe3e8;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
       }
 
       .entry {
-        min-height: 230px;
-        padding: 34px 30px 32px 0;
+        display: flex;
+        min-height: 240px;
+        padding: 34px;
+        flex-direction: column;
+        align-items: flex-start;
+        border: 1px solid rgba(203, 213, 225, 0.58);
+        border-radius: 24px;
+        background: #ffffff;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
         text-decoration: none;
-      }
-
-      .entry + .entry {
-        padding-left: 30px;
-        border-left: 1px solid #dfe3e8;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
       }
 
       .entry h2 {
-        margin: 0 0 18px;
-        font-size: 24px;
-        line-height: 1.35;
+        margin: 0 0 16px;
+        color: #182230;
+        font-size: 23px;
+        line-height: 1.4;
+        font-weight: 700;
       }
 
       .entry p {
         margin: 0;
-        color: #5b6470;
+        color: #5d6673;
         font-size: 16px;
-        line-height: 1.8;
+        line-height: 1.85;
       }
 
       .entry span {
         display: inline-block;
-        margin-top: 32px;
+        margin-top: auto;
+        padding-top: 30px;
         color: #1d4ed8;
         font-size: 15px;
-        font-weight: 700;
+        font-weight: 600;
+      }
+
+      .entry:hover {
+        transform: translateY(-4px);
+        border-color: rgba(147, 180, 255, 0.7);
+        box-shadow: 0 16px 38px rgba(15, 23, 42, 0.1);
       }
 
       .entry:hover span {
@@ -162,8 +171,13 @@ const entries = [
       }
 
       .subscribe {
-        max-width: 720px;
-        margin: 96px auto 16px;
+        max-width: 780px;
+        margin: 48px auto 0;
+        padding: 42px;
+        border: 1px solid rgba(203, 213, 225, 0.58);
+        border-radius: 24px;
+        background: #ffffff;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
         text-align: center;
       }
 
@@ -174,8 +188,8 @@ const entries = [
 
       .subscribe p {
         margin: 0 0 28px;
-        color: #5b6470;
-        line-height: 1.7;
+        color: #5d6673;
+        line-height: 1.75;
       }
 
       .subscribe-form {
@@ -189,7 +203,7 @@ const entries = [
         height: 48px;
         padding: 0 15px;
         border: 1px solid #cfd5dc;
-        border-radius: 6px;
+        border-radius: 10px;
         font: inherit;
         color: #111827;
         background: #ffffff;
@@ -205,7 +219,7 @@ const entries = [
         height: 48px;
         padding: 0 24px;
         border: 0;
-        border-radius: 6px;
+        border-radius: 10px;
         background: #1d4ed8;
         color: #ffffff;
         font: inherit;
@@ -219,7 +233,8 @@ const entries = [
 
       footer {
         padding: 30px 24px;
-        border-top: 1px solid #e5e7eb;
+        border-top: 1px solid #e2e8f0;
+        background: #ffffff;
         color: #6b7280;
         text-align: center;
         font-size: 14px;
@@ -231,7 +246,7 @@ const entries = [
 
       @media (max-width: 760px) {
         header {
-          min-height: 440px;
+          min-height: 420px;
           padding: 24px;
         }
 
@@ -244,11 +259,11 @@ const entries = [
         }
 
         .hero {
-          margin-top: 104px;
+          margin-top: 92px;
         }
 
         h1 {
-          font-size: 42px;
+          font-size: 40px;
         }
 
         .hero p {
@@ -257,31 +272,27 @@ const entries = [
 
         main {
           width: min(100% - 36px, 1040px);
-          padding: 56px 0;
+          padding: 40px 0 56px;
         }
 
         .entries {
-          display: block;
+          grid-template-columns: 1fr;
+          gap: 18px;
         }
 
-        .entry,
-        .entry + .entry {
-          display: block;
+        .entry {
           min-height: 0;
-          padding: 28px 0;
-          border-left: 0;
-        }
-
-        .entry + .entry {
-          border-top: 1px solid #dfe3e8;
+          padding: 28px;
         }
 
         .entry span {
-          margin-top: 20px;
+          margin-top: 0;
+          padding-top: 24px;
         }
 
         .subscribe {
-          margin-top: 64px;
+          margin-top: 32px;
+          padding: 32px 24px;
         }
 
         .subscribe-form {
@@ -329,15 +340,22 @@ const entries = [
       <section id="subscribe" class="subscribe">
         <h2>订阅更新</h2>
         <p>订阅更新，获取最新研报与持仓复盘提醒。</p>
-        <form class="subscribe-form">
+        <form
+          action="https://buttondown.com/api/emails/embed-subscribe/yufang"
+          method="post"
+          target="_blank"
+          class="subscribe-form embeddable-buttondown-form"
+        >
           <input
             type="email"
             name="email"
+            id="bd-email"
             placeholder="请输入你的邮箱"
             aria-label="请输入你的邮箱"
             required
           />
-          <button type="button">订阅</button>
+          <input type="hidden" name="embed" value="1" />
+          <button type="submit">订阅</button>
         </form>
       </section>
     </main>
