@@ -1,7 +1,13 @@
 ---
 import { SITE_DISCLAIMER } from "../../consts";
 
-const holdings = ["PWR", "STX", "LITE", "CIEN", "COHR"];
+const holdings = [
+  ["PWR", "576.24", "771.61", "+33.90%"],
+  ["STX", "496.30", "771.01", "+55.35%"],
+  ["LITE", "896.02", "994.56", "+11.00%"],
+  ["CIEN", "494.01", "544.75", "+10.27%"],
+  ["COHR", "281.79", "335.73", "+19.14%"]
+];
 ---
 
 <html lang="zh-CN">
@@ -25,9 +31,12 @@ const holdings = ["PWR", "STX", "LITE", "CIEN", "COHR"];
       .summary span { display: block; margin-bottom: 6px; color: #6b7280; font-size: 13px; }
       .summary strong { font-size: 18px; }
       h2 { margin: 44px 0 16px; font-size: 23px; }
-      table { width: 100%; border-collapse: collapse; }
+      .table-scroll { overflow-x: auto; }
+      table { width: 100%; min-width: 600px; border-collapse: collapse; }
       th, td { padding: 14px 0; border-bottom: 1px solid #e5e7eb; text-align: left; }
       th { color: #6b7280; font-size: 13px; font-weight: 600; }
+      th:not(:first-child), td:not(:first-child) { text-align: right; }
+      .change { font-weight: 800; }
       .disclaimer { margin-top: 52px; padding-top: 28px; border-top: 1px solid #dfe3e8; color: #6b7280; font-size: 14px; line-height: 1.8; }
       footer { padding: 30px 24px; border-top: 1px solid #e5e7eb; color: #6b7280; text-align: center; font-size: 14px; }
       footer a { color: inherit; }
@@ -36,6 +45,9 @@ const holdings = ["PWR", "STX", "LITE", "CIEN", "COHR"];
         article { width: calc(100% - 36px); padding: 52px 0 80px; }
         h1 { font-size: 31px; }
         .summary { grid-template-columns: 1fr; gap: 18px; }
+        table { min-width: 100%; table-layout: fixed; }
+        th, td { padding: 12px 4px; font-size: 12px; }
+        th:first-child, td:first-child { width: 18%; }
       }
     </style>
   </head>
@@ -62,12 +74,23 @@ const holdings = ["PWR", "STX", "LITE", "CIEN", "COHR"];
       </section>
 
       <h2>完整持仓</h2>
-      <table>
-        <thead><tr><th>股票</th></tr></thead>
-        <tbody>
-          {holdings.map((stock) => <tr><td>{stock}</td></tr>)}
-        </tbody>
-      </table>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>股票</th><th>买入收盘价</th><th>平仓收盘价</th><th>个股涨跌幅</th></tr>
+          </thead>
+          <tbody>
+            {holdings.map(([stock, openPrice, closePrice, returnRate]) => (
+              <tr>
+                <td>{stock}</td>
+                <td>{openPrice}</td>
+                <td>{closePrice}</td>
+                <td class="change">{returnRate}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <div class="disclaimer">{SITE_DISCLAIMER}</div>
     </article>
