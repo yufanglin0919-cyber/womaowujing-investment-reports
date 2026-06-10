@@ -7,10 +7,10 @@ export function GET(context) {
     site: context.site,
     items: [
       {
-        title: '美股科技板块观察：AI算力主线仍需结合估值和盈利验证',
-        pubDate: new Date('2026-05-24'),
-        description: '记录美股科技板块的阶段观察与风险变化。',
-        link: '/articles/us-tech-weekly-2026-05-24/',
+        title: '6月10日美股市场观点：科技主线降温，宏观压力重新抬头',
+        pubDate: new Date('2026-06-10'),
+        description: '复盘科技股估值、通胀压力、利率预期与市场风险变化。',
+        link: '/articles/us-market-view-2026-06-10/',
       },
       {
         title: '第 2 期持仓与盈亏记录',
