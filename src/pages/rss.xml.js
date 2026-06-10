@@ -13,6 +13,12 @@ export function GET(context) {
         link: '/articles/us-market-view-2026-06-10/',
       },
       {
+        title: '6月10日个股观察：当前持仓与AI科技主线复盘',
+        pubDate: new Date('2026-06-10'),
+        description: '观察八只美股科技公司的产业逻辑、业绩变化与主要风险。',
+        link: '/articles/ai-stock-watch-2026-06-10/',
+      },
+      {
         title: '第 2 期持仓与盈亏记录',
         pubDate: new Date('2026-05-14'),
         description: '记录 2026-04-17 至 2026-05-14 的完整持仓与阶段盈亏。',
