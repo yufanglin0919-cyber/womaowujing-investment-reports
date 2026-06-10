@@ -1,20 +1,11 @@
 ---
-import { SITE_DISCLAIMER } from "../../consts";
-
-const articles = [
+const reports = [
   {
     title: "美股科技板块观察：AI 算力主线仍需结合估值和盈利验证",
     date: "2026-05-24",
-    category: "免费样本",
-    desc: "按照产品化报告结构整理行业逻辑、核心数据表、估值位置、风险清单和后续跟踪指标。",
+    type: "市场观点",
+    desc: "记录美股科技板块的阶段观察与风险变化。",
     link: "/articles/us-tech-weekly-2026-05-24/"
-  },
-  {
-    title: "投研报告模板",
-    date: "模板",
-    category: "报告结构",
-    desc: "用于后续新增公司研究，保留一句话结论、核心数据表、行业逻辑、公司逻辑、估值位置和免责声明。",
-    link: "/reports/holding-understanding-template/"
   }
 ];
 ---
@@ -22,75 +13,75 @@ const articles = [
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <title>投资报告 - 398的美股策略｜美股科技投研</title>
+    <title>研报与观点 - 398的美股策略</title>
+    <meta name="description" content="398的美股策略研报与市场观点归档。" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f5f7fb; color: #1f2937; }
-      header { background: linear-gradient(135deg, #0f172a, #1e3a8a); color: white; padding: 28px 10%; }
-      nav { display: flex; justify-content: space-between; align-items: center; }
-      .logo { font-size: 20px; font-weight: 800; }
-      nav a { color: white; text-decoration: none; margin-left: 24px; font-weight: 600; }
-      main { max-width: 1040px; margin: 56px auto; padding: 0 24px; }
-      .hero, .card, .pagination, .disclaimer { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08); }
-      .hero { margin-bottom: 28px; }
-      h1 { margin-top: 0; font-size: 34px; }
-      p { color: #4b5563; line-height: 1.8; }
-      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px; }
-      .meta { color: #1d4ed8; font-size: 14px; font-weight: 800; }
-      .card h2 { margin: 10px 0; font-size: 22px; line-height: 1.45; }
-      .card a { color: #1d4ed8; font-weight: 800; text-decoration: none; }
-      .pagination { margin-top: 32px; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #4b5563; }
-      .disabled { color: #9ca3af; }
-      .disclaimer { margin-top: 32px; background: #eef2ff; border-left: 5px solid #2563eb; box-shadow: none; color: #374151; }
-      footer { text-align: center; color: #6b7280; padding: 42px 20px; font-size: 14px; }
-      @media (max-width: 700px) { nav { display: block; } nav div:last-child { margin-top: 16px; } nav a { display: inline-block; margin-left: 0; margin-right: 18px; margin-bottom: 8px; } .pagination { display: block; } }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; color: #111827; background: #ffffff; }
+      header { border-bottom: 1px solid #e5e7eb; }
+      nav { width: min(1040px, calc(100% - 48px)); min-height: 72px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      nav a { color: #111827; text-decoration: none; }
+      .brand { font-size: 20px; font-weight: 800; }
+      .links { display: flex; gap: 28px; font-size: 15px; }
+      main { width: min(920px, calc(100% - 48px)); margin: 0 auto; padding: 80px 0 112px; }
+      h1 { margin: 0 0 14px; font-size: 38px; letter-spacing: 0; }
+      .intro { margin: 0 0 56px; color: #5b6470; line-height: 1.8; }
+      .report-list { border-top: 1px solid #dfe3e8; }
+      .report { display: grid; grid-template-columns: 130px 1fr 24px; gap: 24px; align-items: start; padding: 28px 0; border-bottom: 1px solid #dfe3e8; color: inherit; text-decoration: none; }
+      .meta { color: #6b7280; font-size: 14px; line-height: 1.7; }
+      .meta span { display: block; }
+      .report h2 { margin: 0 0 10px; font-size: 22px; line-height: 1.45; }
+      .report p { margin: 0; color: #5b6470; line-height: 1.75; }
+      .arrow { color: #1d4ed8; font-size: 20px; }
+      .report:hover h2 { color: #1d4ed8; }
+      footer { padding: 30px 24px; border-top: 1px solid #e5e7eb; color: #6b7280; text-align: center; font-size: 14px; }
+      footer a { color: inherit; }
+      @media (max-width: 640px) {
+        nav { width: calc(100% - 36px); min-height: 64px; }
+        main { width: calc(100% - 36px); padding: 56px 0 80px; }
+        h1 { font-size: 32px; }
+        .intro { margin-bottom: 36px; }
+        .report { grid-template-columns: 1fr 20px; gap: 14px; }
+        .meta { grid-column: 1 / -1; display: flex; gap: 12px; }
+        .meta span { display: inline; }
+      }
     </style>
   </head>
   <body>
     <header>
       <nav>
-        <div class="logo">398的美股策略｜美股科技投研</div>
-        <div>
+        <a class="brand" href="/">398的美股策略</a>
+        <div class="links">
           <a href="/">首页</a>
-          <a href="/holdings/">研究跟踪池</a>
-          <a href="/reports/">投资报告</a>
-          <a href="/history/">历史复盘</a>
-          <a href="/subscribe/">订阅说明</a>
+          <a href="/disclaimer/">免责声明</a>
         </div>
       </nav>
     </header>
 
     <main>
-      <section class="hero">
-        <h1>投资报告</h1>
-        <p>
-          报告页面会按照固定结构整理美股科技公司和行业主题：一句话结论、核心数据表、行业逻辑、公司逻辑、估值位置、风险清单和后续跟踪指标。
-          数据不足的地方先显示“待补充”，方便后续更新。
-        </p>
-      </section>
+      <h1>研报与观点</h1>
+      <p class="intro">美股投资报告、市场观点和阶段性复盘。</p>
 
-      <section id="free-samples" class="grid">
-        {articles.map((article) => (
-          <article class="card">
-            <div class="meta">{article.category} ｜ {article.date}</div>
-            <h2>{article.title}</h2>
-            <p>{article.desc}</p>
-            <a href={article.link}>阅读全文 →</a>
-          </article>
+      <section class="report-list" aria-label="研报与观点列表">
+        {reports.map((report) => (
+          <a class="report" href={report.link}>
+            <div class="meta">
+              <span>{report.date}</span>
+              <span>{report.type}</span>
+            </div>
+            <div>
+              <h2>{report.title}</h2>
+              <p>{report.desc}</p>
+            </div>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
         ))}
-      </section>
-
-      <section class="pagination">
-        <span class="disabled">上一页</span>
-        <strong>第 1 页 / 共 1 页</strong>
-        <span class="disabled">下一页（后续报告增加后启用）</span>
-      </section>
-
-      <section class="disclaimer">
-        <strong>免责声明：</strong>{SITE_DISCLAIMER}
       </section>
     </main>
 
-    <footer>© 2026 398的美股策略｜美股科技投研</footer>
+    <footer>
+      © 2026 398的美股策略 · <a href="/disclaimer/">免责声明</a>
+    </footer>
   </body>
 </html>

@@ -3,13 +3,21 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} 398的美股策略｜美股科技投研。本网站内容仅用于研究学习和市场观察。
+	&copy; {today.getFullYear()} 398的美股策略
+	<span aria-hidden="true"> · </span>
+	<a href="/disclaimer/">免责声明</a>
 </footer>
 <style>
 	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
+		padding: 2.5em 1em;
+		background: white;
+		border-top: 1px solid #e5e7eb;
+		color: #6b7280;
 		text-align: center;
+		font-size: 14px;
+	}
+
+	a {
+		color: inherit;
 	}
 </style>

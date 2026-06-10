@@ -1,117 +1,88 @@
 ---
 import { SITE_DISCLAIMER } from "../../consts";
+
+const holdings = [
+  ["ICHR", "+24.57%"],
+  ["UCTT", "+22.05%"],
+  ["FORM", "+34.26%"],
+  ["COHR", "+19.03%"],
+  ["TER", "+21.01%"]
+];
 ---
 
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <title>2026-04-16 策略复盘 - 398的美股策略｜美股科技投研</title>
+    <title>第 1 期持仓与盈亏记录 - 398的美股策略</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f5f7fb; color: #1f2937; }
-      header { background: linear-gradient(135deg, #0f172a, #1e3a8a); color: white; padding: 28px 10%; }
-      nav { display: flex; justify-content: space-between; align-items: center; }
-      .logo { font-size: 20px; font-weight: 800; }
-      nav a { color: white; text-decoration: none; margin-left: 24px; font-weight: 600; }
-      article { max-width: 940px; margin: 56px auto; padding: 0 24px; line-height: 1.9; }
-      .content { background: white; padding: 38px; border-radius: 20px; box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08); }
-      h1 { font-size: 34px; line-height: 1.35; margin-top: 0; }
-      h2 { margin-top: 36px; font-size: 24px; }
-      p, td, th, li { color: #4b5563; }
-      .table-wrap { width: 100%; overflow-x: auto; }
-      table { width: 100%; border-collapse: collapse; margin-top: 18px; min-width: 720px; }
-      th, td { border-bottom: 1px solid #e5e7eb; padding: 12px 10px; text-align: left; vertical-align: top; }
-      th { color: #1f2937; background: #eef2ff; }
-      .meta { color: #6b7280; font-size: 14px; margin-bottom: 28px; }
-      .back { display: inline-block; margin-bottom: 22px; color: #2563eb; text-decoration: none; font-weight: 800; }
-      .disclaimer { margin-top: 40px; padding: 20px 24px; background: #eef2ff; border-left: 5px solid #2563eb; border-radius: 14px; color: #374151; }
-      footer { text-align: center; color: #6b7280; padding: 42px 20px; font-size: 14px; }
-      @media (max-width: 700px) { nav { display: block; } nav div:last-child { margin-top: 16px; } nav a { display: inline-block; margin-left: 0; margin-right: 18px; margin-bottom: 8px; } .content { padding: 28px; } }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; color: #111827; background: #ffffff; }
+      header { border-bottom: 1px solid #e5e7eb; }
+      nav { width: min(1040px, calc(100% - 48px)); min-height: 72px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      nav a { color: #111827; text-decoration: none; }
+      .brand { font-size: 20px; font-weight: 800; }
+      .links { display: flex; gap: 28px; font-size: 15px; }
+      article { width: min(760px, calc(100% - 48px)); margin: 0 auto; padding: 72px 0 112px; }
+      .back { display: inline-block; margin-bottom: 38px; color: #1d4ed8; font-weight: 700; text-decoration: none; }
+      h1 { margin: 0; font-size: 38px; line-height: 1.35; letter-spacing: 0; }
+      .meta { margin: 18px 0 44px; color: #6b7280; font-size: 14px; }
+      .summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding: 24px 0; border-top: 1px solid #dfe3e8; border-bottom: 1px solid #dfe3e8; }
+      .summary span { display: block; margin-bottom: 6px; color: #6b7280; font-size: 13px; }
+      .summary strong { font-size: 18px; }
+      h2 { margin: 44px 0 16px; font-size: 23px; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { padding: 14px 0; border-bottom: 1px solid #e5e7eb; text-align: left; }
+      th { color: #6b7280; font-size: 13px; font-weight: 600; }
+      td:last-child, th:last-child { text-align: right; }
+      .disclaimer { margin-top: 52px; padding-top: 28px; border-top: 1px solid #dfe3e8; color: #6b7280; font-size: 14px; line-height: 1.8; }
+      footer { padding: 30px 24px; border-top: 1px solid #e5e7eb; color: #6b7280; text-align: center; font-size: 14px; }
+      footer a { color: inherit; }
+      @media (max-width: 640px) {
+        nav { width: calc(100% - 36px); min-height: 64px; }
+        article { width: calc(100% - 36px); padding: 52px 0 80px; }
+        h1 { font-size: 31px; }
+        .summary { grid-template-columns: 1fr; gap: 18px; }
+      }
     </style>
   </head>
-
   <body>
     <header>
       <nav>
-        <div class="logo">398的美股策略｜美股科技投研</div>
-        <div>
+        <a class="brand" href="/">398的美股策略</a>
+        <div class="links">
           <a href="/">首页</a>
-          <a href="/holdings/">研究跟踪池</a>
-          <a href="/reports/">投资报告</a>
-          <a href="/history/">历史复盘</a>
-          <a href="/subscribe/">订阅说明</a>
+          <a href="/disclaimer/">免责声明</a>
         </div>
       </nav>
     </header>
 
     <article>
-      <a class="back" href="/history/">← 返回历史复盘</a>
+      <a class="back" href="/holdings/">← 返回历史持仓与盈亏</a>
+      <h1>第 1 期持仓与盈亏记录</h1>
+      <p class="meta">已平仓 · 已完整公开</p>
 
-      <section class="content">
-        <h1>2026-04-16 策略复盘</h1>
-        <p class="meta">2026-04-16 ｜ 复盘区间：2026-03-19 至 2026-04-16</p>
-
-        <h2>1. 固定复盘指标</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>指标</th>
-                <th>结果</th>
-                <th>说明</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>策略收益</td><td>+24.18%</td><td>等权组合收益。</td></tr>
-              <tr><td>基准收益</td><td>待补充</td><td>QQQ / Nasdaq 100 / SPY 同期收益待补充。</td></tr>
-              <tr><td>超额收益</td><td>待补充</td><td>策略收益减去基准收益。</td></tr>
-              <tr><td>最大回撤</td><td>待补充</td><td>该轮期间最大回撤待补充。</td></tr>
-              <tr><td>胜率</td><td>5/5</td><td>五个样本均为正收益。</td></tr>
-              <tr><td>交易成本</td><td>待补充</td><td>是否扣除手续费和滑点需要在正式口径中标注。</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h2>2. 样本表现</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>股票代码</th>
-                <th>期初价格</th>
-                <th>期末价格</th>
-                <th>区间收益</th>
-                <th>备注</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>ICHR</td><td>51.12</td><td>63.68</td><td>+24.57%</td><td>正收益，原因待补充。</td></tr>
-              <tr><td>UCTT</td><td>62.63</td><td>76.44</td><td>+22.05%</td><td>正收益，原因待补充。</td></tr>
-              <tr><td>FORM</td><td>95.10</td><td>127.68</td><td>+34.26%</td><td>主要贡献项，原因待补充。</td></tr>
-              <tr><td>COHR</td><td>275.57</td><td>328.00</td><td>+19.03%</td><td>正收益，原因待补充。</td></tr>
-              <tr><td>TER</td><td>302.40</td><td>365.92</td><td>+21.01%</td><td>正收益，原因待补充。</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h2>3. 持仓逻辑</h2>
-        <p>
-          本轮样本更偏半导体设备和制造链方向。正式复盘需要补充当时的行业景气度、财报指标、估值位置和具体风险假设。
-        </p>
-
-        <h2>4. 错误复盘</h2>
-        <p>
-          虽然本轮五个样本均为正收益，但仍需要复盘收益来源是否主要来自行业整体上行，以及不同公司之间的基本面差异是否被充分识别。
-          如果只记录结果，后续很难判断策略本身是否稳定。
-        </p>
-
-        <h2>5. 免责声明</h2>
-        <div class="disclaimer">
-          {SITE_DISCLAIMER}
-        </div>
+      <section class="summary">
+        <div><span>买入 / 换仓日期</span><strong>2026-03-19</strong></div>
+        <div><span>平仓日期</span><strong>2026-04-16</strong></div>
+        <div><span>阶段收益率</span><strong>+24.18%</strong></div>
       </section>
+
+      <h2>完整持仓</h2>
+      <table>
+        <thead><tr><th>股票</th><th>阶段收益率</th></tr></thead>
+        <tbody>
+          {holdings.map(([stock, returnRate]) => (
+            <tr><td>{stock}</td><td>{returnRate}</td></tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div class="disclaimer">{SITE_DISCLAIMER}</div>
     </article>
 
-    <footer>© 2026 398的美股策略｜美股科技投研</footer>
+    <footer>
+      © 2026 398的美股策略 · <a href="/disclaimer/">免责声明</a>
+    </footer>
   </body>
 </html>

@@ -1,0 +1,47 @@
+---
+import { SITE_DISCLAIMER, SITE_TITLE } from "../consts";
+---
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>免责声明 - {SITE_TITLE}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; color: #111827; background: #ffffff; }
+      header { border-bottom: 1px solid #e5e7eb; }
+      nav { width: min(1040px, calc(100% - 48px)); min-height: 72px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      .brand { font-size: 20px; font-weight: 800; }
+      nav a { color: #111827; text-decoration: none; }
+      .links { display: flex; gap: 28px; font-size: 15px; }
+      main { width: min(760px, calc(100% - 48px)); margin: 0 auto; padding: 88px 0 120px; }
+      h1 { margin: 0 0 36px; font-size: 38px; letter-spacing: 0; }
+      p { margin: 0; color: #4b5563; font-size: 17px; line-height: 2; }
+      footer { padding: 30px 24px; border-top: 1px solid #e5e7eb; color: #6b7280; text-align: center; font-size: 14px; }
+      @media (max-width: 640px) {
+        nav { width: calc(100% - 36px); min-height: 64px; }
+        main { width: calc(100% - 36px); padding: 64px 0 88px; }
+        h1 { font-size: 32px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a class="brand" href="/">398的美股策略</a>
+        <div class="links">
+          <a href="/">首页</a>
+          <a href="/disclaimer/">免责声明</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <h1>免责声明</h1>
+      <p>{SITE_DISCLAIMER}</p>
+    </main>
+
+    <footer>© 2026 398的美股策略</footer>
+  </body>
+</html>
