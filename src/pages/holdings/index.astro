@@ -2,33 +2,30 @@
 const records = [
   {
     period: "第 3 期",
-    openDate: "待更新",
-    closeDate: "未平仓",
-    status: "部分公开",
-    publicStocks: "股票 1（待更新）、股票 2（待更新）",
-    fullHoldings: "其余持仓将在平仓后公开",
-    returnRate: "平仓后公开",
-    link: null
+    periodRange: "2026-05-06 → 2026-06-04",
+    closeDate: "2026-06-04",
+    status: "已完整公开",
+    holdings: "MU、LITE、STM、TER、DIOD",
+    returnRate: "+17.61%",
+    link: "/articles/stock-hold-2026-06-04/"
   },
   {
     period: "第 2 期",
-    openDate: "2026-04-17",
-    closeDate: "2026-05-14",
+    periodRange: "2026-04-08 → 2026-05-05",
+    closeDate: "2026-05-05",
     status: "已完整公开",
-    publicStocks: "DOCN、NXT",
-    fullHoldings: "DOCN、NXT、AKAM、LMT、NEE",
-    returnRate: "+33.48%",
-    link: "/articles/stock_hold_2026-05-14/"
+    holdings: "PWR、STX、LITE、CIEN、COHR",
+    returnRate: "+25.93%",
+    link: "/articles/stock-hold-2026-05-05/"
   },
   {
     period: "第 1 期",
-    openDate: "2026-03-19",
-    closeDate: "2026-04-16",
+    periodRange: "2026-03-10 → 2026-04-07",
+    closeDate: "2026-04-07",
     status: "已完整公开",
-    publicStocks: "ICHR、UCTT",
-    fullHoldings: "ICHR、UCTT、FORM、COHR、TER",
-    returnRate: "+24.18%",
-    link: "/articles/stock_hold_2026-04-16/"
+    holdings: "CIEN、GEV、HII、ONTO、MU",
+    returnRate: "+8.89%",
+    link: "/articles/stock-hold-2026-04-07/"
   }
 ];
 ---
@@ -86,7 +83,7 @@ const records = [
 
     <main>
       <h1>历史持仓与盈亏</h1>
-      <p class="intro">未平仓记录仅公开前两个股票，完整持仓与阶段收益在平仓后公开。</p>
+      <p class="intro">展示每期持仓区间、完整持仓与等权组合收益率。</p>
 
       <section class="records" aria-label="历史持仓记录">
         {records.map((record) => (
@@ -97,23 +94,19 @@ const records = [
             </div>
             <dl>
               <div>
-                <dt>买入 / 换仓日期</dt>
-                <dd>{record.openDate}</dd>
+                <dt>持仓期间</dt>
+                <dd>{record.periodRange}</dd>
               </div>
               <div>
                 <dt>平仓日期</dt>
                 <dd>{record.closeDate}</dd>
               </div>
               <div>
-                <dt>当前公开股票</dt>
-                <dd>{record.publicStocks}</dd>
+                <dt>持仓股票</dt>
+                <dd>{record.holdings}</dd>
               </div>
               <div>
-                <dt>完整持仓</dt>
-                <dd>{record.fullHoldings}</dd>
-              </div>
-              <div>
-                <dt>阶段收益率</dt>
+                <dt>等权组合收益率</dt>
                 <dd class="return">{record.returnRate}</dd>
               </div>
             </dl>

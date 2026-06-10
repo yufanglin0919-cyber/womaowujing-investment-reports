@@ -19,16 +19,22 @@ export function GET(context) {
         link: '/articles/ai-stock-watch-2026-06-10/',
       },
       {
+        title: '第 3 期持仓与盈亏记录',
+        pubDate: new Date('2026-06-04'),
+        description: '记录 2026-05-06 至 2026-06-04 的完整持仓与等权组合收益率。',
+        link: '/articles/stock-hold-2026-06-04/',
+      },
+      {
         title: '第 2 期持仓与盈亏记录',
-        pubDate: new Date('2026-05-14'),
-        description: '记录 2026-04-17 至 2026-05-14 的完整持仓与阶段盈亏。',
-        link: '/articles/stock_hold_2026-05-14/',
+        pubDate: new Date('2026-05-05'),
+        description: '记录 2026-04-08 至 2026-05-05 的完整持仓与等权组合收益率。',
+        link: '/articles/stock-hold-2026-05-05/',
       },
       {
         title: '第 1 期持仓与盈亏记录',
-        pubDate: new Date('2026-04-16'),
-        description: '记录 2026-03-19 至 2026-04-16 的完整持仓与阶段盈亏。',
-        link: '/articles/stock_hold_2026-04-16/',
+        pubDate: new Date('2026-04-07'),
+        description: '记录 2026-03-10 至 2026-04-07 的完整持仓与等权组合收益率。',
+        link: '/articles/stock-hold-2026-04-07/',
       },
     ],
   });

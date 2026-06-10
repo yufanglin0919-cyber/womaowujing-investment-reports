@@ -1,13 +1,7 @@
 ---
 import { SITE_DISCLAIMER } from "../../consts";
 
-const holdings = [
-  ["DOCN", "+84.98%"],
-  ["NXT", "+28.15%"],
-  ["AKAM", "+62.34%"],
-  ["LMT", "-12.12%"],
-  ["NEE", "+4.02%"]
-];
+const holdings = ["PWR", "STX", "LITE", "CIEN", "COHR"];
 ---
 
 <html lang="zh-CN">
@@ -34,7 +28,6 @@ const holdings = [
       table { width: 100%; border-collapse: collapse; }
       th, td { padding: 14px 0; border-bottom: 1px solid #e5e7eb; text-align: left; }
       th { color: #6b7280; font-size: 13px; font-weight: 600; }
-      td:last-child, th:last-child { text-align: right; }
       .disclaimer { margin-top: 52px; padding-top: 28px; border-top: 1px solid #dfe3e8; color: #6b7280; font-size: 14px; line-height: 1.8; }
       footer { padding: 30px 24px; border-top: 1px solid #e5e7eb; color: #6b7280; text-align: center; font-size: 14px; }
       footer a { color: inherit; }
@@ -63,18 +56,16 @@ const holdings = [
       <p class="meta">已平仓 · 已完整公开</p>
 
       <section class="summary">
-        <div><span>买入 / 换仓日期</span><strong>2026-04-17</strong></div>
-        <div><span>平仓日期</span><strong>2026-05-14</strong></div>
-        <div><span>阶段收益率</span><strong>+33.48%</strong></div>
+        <div><span>持仓期间</span><strong>2026-04-08 → 2026-05-05</strong></div>
+        <div><span>平仓日期</span><strong>2026-05-05</strong></div>
+        <div><span>等权组合收益率</span><strong>+25.93%</strong></div>
       </section>
 
       <h2>完整持仓</h2>
       <table>
-        <thead><tr><th>股票</th><th>阶段收益率</th></tr></thead>
+        <thead><tr><th>股票</th></tr></thead>
         <tbody>
-          {holdings.map(([stock, returnRate]) => (
-            <tr><td>{stock}</td><td>{returnRate}</td></tr>
-          ))}
+          {holdings.map((stock) => <tr><td>{stock}</td></tr>)}
         </tbody>
       </table>
 
