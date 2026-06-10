@@ -232,6 +232,27 @@ const entries = [
         background: #1e40af;
       }
 
+      .subscribe-form button:disabled {
+        cursor: wait;
+        opacity: 0.72;
+      }
+
+      .subscribe-message {
+        min-height: 24px;
+        margin: 16px 0 0;
+        color: #5d6673;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .subscribe-message[data-state="success"] {
+        color: #047857;
+      }
+
+      .subscribe-message[data-state="error"] {
+        color: #b42318;
+      }
+
       footer {
         padding: 30px 24px;
         border-top: 1px solid #e2e8f0;
@@ -341,28 +362,75 @@ const entries = [
       <section id="subscribe" class="subscribe">
         <h2>订阅更新</h2>
         <p>订阅更新，获取最新研报与持仓复盘提醒。</p>
-        <form
-          action="https://buttondown.com/api/emails/embed-subscribe/yufang"
-          method="post"
-          target="_blank"
-          class="subscribe-form embeddable-buttondown-form"
-        >
+        <form class="subscribe-form" novalidate>
           <input
             type="email"
             name="email"
-            id="bd-email"
+            id="subscribe-email"
             placeholder="请输入你的邮箱"
             aria-label="请输入你的邮箱"
             required
           />
-          <input type="hidden" name="embed" value="1" />
           <button type="submit">订阅</button>
         </form>
+        <div
+          class="subscribe-message"
+          role="status"
+          aria-live="polite"
+        ></div>
       </section>
     </main>
 
     <footer>
       © 2026 398的美股策略 · <a href="/disclaimer/">免责声明</a>
     </footer>
+
+    <script>
+      const form = document.querySelector(".subscribe-form");
+      const input = document.querySelector("#subscribe-email");
+      const button = form?.querySelector("button");
+      const message = document.querySelector(".subscribe-message");
+
+      form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (!(input instanceof HTMLInputElement) ||
+            !(button instanceof HTMLButtonElement) ||
+            !(message instanceof HTMLElement)) {
+          return;
+        }
+
+        button.disabled = true;
+        button.textContent = "提交中...";
+        message.textContent = "";
+        message.dataset.state = "";
+
+        try {
+          const response = await fetch("/api/subscribe", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email: input.value
+            })
+          });
+
+          const result = await response.json();
+          message.textContent = result.message ?? "订阅失败，请稍后再试。";
+          message.dataset.state = result.success ? "success" : "error";
+
+          if (result.success) {
+            input.value = "";
+          }
+        } catch {
+          message.textContent = "订阅失败，请稍后再试。";
+          message.dataset.state = "error";
+        } finally {
+          button.disabled = false;
+          button.textContent = "订阅";
+        }
+      });
+    </script>
   </body>
 </html>
