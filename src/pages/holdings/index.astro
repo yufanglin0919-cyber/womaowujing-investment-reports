@@ -1,4 +1,6 @@
 ---
+import TitleMark from "../../components/TitleMark.astro";
+
 const records = [
   {
     period: "第 3 期",
@@ -82,7 +84,7 @@ const sortedRecords = [...records].sort((a, b) =>
   <body>
     <header>
       <nav>
-        <a class="brand" href="/">398的美股策略</a>
+        <a class="brand" href="/"><TitleMark>398的美股策略</TitleMark></a>
         <div class="links">
           <a href="/">首页</a>
           <a href="/disclaimer/">免责声明</a>
@@ -91,14 +93,14 @@ const sortedRecords = [...records].sort((a, b) =>
     </header>
 
     <main>
-      <h1>历史持仓盈亏</h1>
+      <h1><TitleMark>历史持仓盈亏</TitleMark></h1>
       <p class="intro">展示每期持仓区间、完整持仓与等权组合收益率。</p>
 
       <section class="records" aria-label="历史持仓记录">
         {sortedRecords.map((record, index) => (
           <article class="record" data-list-item data-index={index}>
             <div class="record-head">
-              <h2>{record.period}</h2>
+              <h2><TitleMark>{record.period}</TitleMark></h2>
               <span class="status">{record.status}</span>
             </div>
             <dl>

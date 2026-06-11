@@ -1,4 +1,6 @@
 ---
+import TitleMark from "../../components/TitleMark.astro";
+
 const reports = [
   {
     title: "今晚美股大涨：不是普通反弹，而是科技主线的风险偏好修复",
@@ -75,7 +77,7 @@ const sortedReports = [...reports].sort((a, b) =>
   <body>
     <header>
       <nav>
-        <a class="brand" href="/">398的美股策略</a>
+        <a class="brand" href="/"><TitleMark>398的美股策略</TitleMark></a>
         <div class="links">
           <a href="/">首页</a>
           <a href="/disclaimer/">免责声明</a>
@@ -84,7 +86,7 @@ const sortedReports = [...reports].sort((a, b) =>
     </header>
 
     <main>
-      <h1>市场观点</h1>
+      <h1><TitleMark>市场观点</TitleMark></h1>
       <p class="intro">美股市场观点、个股观察和阶段性复盘。</p>
 
       <section class="report-list" aria-label="市场观点列表">
@@ -95,7 +97,7 @@ const sortedReports = [...reports].sort((a, b) =>
               <span>{report.type}</span>
             </div>
             <div>
-              <h2>{report.title}</h2>
+              <h2><TitleMark>{report.title}</TitleMark></h2>
               <p>{report.desc}</p>
             </div>
             <span class="arrow" aria-hidden="true">→</span>

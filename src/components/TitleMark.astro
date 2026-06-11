@@ -1,0 +1,31 @@
+<span class="title-mark">
+  <img src="/images/cat-avatar.jpg" alt="" aria-hidden="true" />
+  <span class="title-mark__text"><slot /></span>
+</span>
+
+<style>
+  .title-mark {
+    display: inline-flex;
+    max-width: 100%;
+    align-items: flex-start;
+    gap: 0.3em;
+    color: inherit;
+    font: inherit;
+  }
+
+  img {
+    width: 1em;
+    height: 1em;
+    margin-top: 0.12em;
+    flex: 0 0 1em;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: 0 1px 5px rgba(15, 23, 42, 0.22);
+  }
+
+  .title-mark__text {
+    min-width: 0;
+  }
+</style>

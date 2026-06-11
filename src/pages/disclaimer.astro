@@ -1,5 +1,6 @@
 ---
 import { SITE_DISCLAIMER, SITE_TITLE } from "../consts";
+import TitleMark from "../components/TitleMark.astro";
 ---
 
 <html lang="zh-CN">
@@ -29,7 +30,7 @@ import { SITE_DISCLAIMER, SITE_TITLE } from "../consts";
   <body>
     <header>
       <nav>
-        <a class="brand" href="/">398的美股策略</a>
+        <a class="brand" href="/"><TitleMark>398的美股策略</TitleMark></a>
         <div class="links">
           <a href="/">首页</a>
           <a href="/disclaimer/">免责声明</a>
@@ -38,7 +39,7 @@ import { SITE_DISCLAIMER, SITE_TITLE } from "../consts";
     </header>
 
     <main>
-      <h1>免责声明</h1>
+      <h1><TitleMark>免责声明</TitleMark></h1>
       <p>{SITE_DISCLAIMER}</p>
     </main>
 

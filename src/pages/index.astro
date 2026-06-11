@@ -1,5 +1,6 @@
 ---
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import TitleMark from "../components/TitleMark.astro";
 
 const entries = [
   {
@@ -335,7 +336,7 @@ const entries = [
   <body>
     <header>
       <nav>
-        <a class="brand" href="/">398的美股策略</a>
+        <a class="brand" href="/"><TitleMark>398的美股策略</TitleMark></a>
         <div class="nav-links">
           <a href="/">首页</a>
           <a href="/disclaimer/">免责声明</a>
@@ -343,7 +344,7 @@ const entries = [
       </nav>
 
       <section class="hero">
-        <h1>398的美股策略</h1>
+        <h1><TitleMark>398的美股策略</TitleMark></h1>
         <p>长期复利，价值投资</p>
       </section>
     </header>
@@ -352,7 +353,7 @@ const entries = [
       <section class="entries" aria-label="网站主要内容">
         {entries.map((entry) => (
           <a class="entry" href={entry.link}>
-            <h2>{entry.title}</h2>
+            <h2><TitleMark>{entry.title}</TitleMark></h2>
             <p>{entry.desc}</p>
             <span>查看内容 →</span>
           </a>
@@ -360,7 +361,7 @@ const entries = [
       </section>
 
       <section id="subscribe" class="subscribe">
-        <h2>订阅更新</h2>
+        <h2><TitleMark>订阅更新</TitleMark></h2>
         <p>订阅更新，获取最新研报与持仓复盘提醒。</p>
         <form class="subscribe-form" novalidate>
           <input

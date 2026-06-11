@@ -1,5 +1,6 @@
 ---
 import { SITE_DISCLAIMER } from "../../consts";
+import TitleMark from "../../components/TitleMark.astro";
 
 const holdings = [
   ["CIEN", "337.36", "447.88", "+32.76%"],
@@ -54,7 +55,7 @@ const holdings = [
   <body>
     <header>
       <nav>
-        <a class="brand" href="/">398的美股策略</a>
+        <a class="brand" href="/"><TitleMark>398的美股策略</TitleMark></a>
         <div class="links">
           <a href="/">首页</a>
           <a href="/disclaimer/">免责声明</a>
@@ -64,7 +65,7 @@ const holdings = [
 
     <article>
       <a class="back" href="/holdings/">← 返回历史持仓与盈亏</a>
-      <h1>第 1 期持仓与盈亏记录</h1>
+      <h1><TitleMark>第 1 期持仓与盈亏记录</TitleMark></h1>
       <p class="meta">已平仓 · 已完整公开</p>
 
       <section class="summary">
@@ -73,7 +74,7 @@ const holdings = [
         <div><span>等权组合收益率</span><strong>+8.89%</strong></div>
       </section>
 
-      <h2>完整持仓</h2>
+      <h2><TitleMark>完整持仓</TitleMark></h2>
       <div class="table-scroll">
         <table>
           <thead>
