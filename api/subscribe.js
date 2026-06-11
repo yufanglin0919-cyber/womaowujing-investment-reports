@@ -21,6 +21,53 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function normalizeEnvironmentValue(value) {
+  const normalizedValue = value?.trim();
+
+  if (
+    normalizedValue?.length >= 2 &&
+    ((normalizedValue.startsWith('"') && normalizedValue.endsWith('"')) ||
+      (normalizedValue.startsWith("'") && normalizedValue.endsWith("'")))
+  ) {
+    return normalizedValue.slice(1, -1).trim();
+  }
+
+  return normalizedValue;
+}
+
+function logSupabaseError(error) {
+  console.error("Supabase subscribers insert failed:", {
+    message: error?.message,
+    code: error?.code,
+    details: error?.details,
+    hint: error?.hint
+  });
+}
+
+async function readSupabaseError(supabaseResponse) {
+  const responseText = await supabaseResponse.text();
+
+  if (!responseText) {
+    return {
+      message: `Supabase returned HTTP ${supabaseResponse.status}`,
+      code: String(supabaseResponse.status),
+      details: null,
+      hint: null
+    };
+  }
+
+  try {
+    return JSON.parse(responseText);
+  } catch {
+    return {
+      message: responseText,
+      code: String(supabaseResponse.status),
+      details: null,
+      hint: null
+    };
+  }
+}
+
 export default async function handler(request, response) {
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
@@ -41,20 +88,25 @@ export default async function handler(request, response) {
     });
   }
 
-  const email =
+  const normalizedEmail =
     typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
 
-  if (!email || !isValidEmail(email)) {
+  if (!normalizedEmail || !isValidEmail(normalizedEmail)) {
     return sendJson(response, 400, {
       success: false,
       message: INVALID_EMAIL_MESSAGE
     });
   }
 
-  const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/+$/, "");
-  const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY;
+  const supabaseUrl = normalizeEnvironmentValue(
+    process.env.SUPABASE_URL
+  )?.replace(/\/+$/, "");
+  const supabaseSecretKey = normalizeEnvironmentValue(
+    process.env.SUPABASE_SECRET_KEY
+  );
 
   if (!supabaseUrl || !supabaseSecretKey) {
+    console.error("Supabase subscription configuration is missing.");
     return sendJson(response, 500, {
       success: false,
       message: FAILURE_MESSAGE
@@ -64,9 +116,12 @@ export default async function handler(request, response) {
   const headers = {
     apikey: supabaseSecretKey,
     "Content-Type": "application/json",
+    "Content-Profile": "public",
     Prefer: "return=minimal"
   };
 
+  // Legacy service-role keys are JWTs and also authenticate through Bearer.
+  // New sb_secret_ keys authenticate through apikey and reject Bearer usage.
   if (supabaseSecretKey.startsWith("eyJ")) {
     headers.Authorization = `Bearer ${supabaseSecretKey}`;
   }
@@ -78,7 +133,7 @@ export default async function handler(request, response) {
         method: "POST",
         headers,
         body: JSON.stringify({
-          email,
+          email: normalizedEmail,
           status: "active",
           source: "website"
         })
@@ -92,13 +147,7 @@ export default async function handler(request, response) {
       });
     }
 
-    let error = {};
-
-    try {
-      error = await supabaseResponse.json();
-    } catch {
-      error = {};
-    }
+    const error = await readSupabaseError(supabaseResponse);
 
     const isDuplicate =
       supabaseResponse.status === 409 ||
@@ -112,11 +161,15 @@ export default async function handler(request, response) {
       });
     }
 
+    logSupabaseError(error);
+
     return sendJson(response, 500, {
       success: false,
       message: FAILURE_MESSAGE
     });
-  } catch {
+  } catch (error) {
+    logSupabaseError(error);
+
     return sendJson(response, 500, {
       success: false,
       message: FAILURE_MESSAGE
