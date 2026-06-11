@@ -214,13 +214,12 @@ function getConfiguration() {
   };
 }
 
-function hasValidConfiguration(configuration) {
+function hasValidDeliveryConfiguration(configuration) {
   return Boolean(
     configuration.supabaseUrl &&
       isValidSupabaseUrl(configuration.supabaseUrl) &&
       configuration.supabaseSecretKey &&
       configuration.resendApiKey &&
-      configuration.adminSecret &&
       isSafeHeaderValue(configuration.fromEmail)
   );
 }
@@ -247,19 +246,8 @@ export default async function handler(request, response) {
 
   const configuration = getConfiguration();
 
-  if (!hasValidConfiguration(configuration)) {
-    console.error("Newsletter configuration is missing or invalid:", {
-      hasSupabaseUrl: Boolean(configuration.supabaseUrl),
-      hasValidSupabaseUrl: Boolean(
-        configuration.supabaseUrl &&
-          isValidSupabaseUrl(configuration.supabaseUrl)
-      ),
-      hasSupabaseSecretKey: Boolean(configuration.supabaseSecretKey),
-      hasResendApiKey: Boolean(configuration.resendApiKey),
-      hasNewsletterAdminSecret: Boolean(configuration.adminSecret),
-      hasNewsletterFromEmail: Boolean(configuration.fromEmail)
-    });
-
+  if (!configuration.adminSecret) {
+    console.error("Newsletter admin authentication is not configured.");
     return sendJson(response, 500, {
       success: false,
       message: FAILURE_MESSAGE
@@ -278,7 +266,26 @@ export default async function handler(request, response) {
   ) {
     return sendJson(response, 401, {
       success: false,
-      message: "管理员密码错误。"
+      message: "管理员登录已失效，请重新登录。"
+    });
+  }
+
+  if (!hasValidDeliveryConfiguration(configuration)) {
+    console.error("Newsletter configuration is missing or invalid:", {
+      hasSupabaseUrl: Boolean(configuration.supabaseUrl),
+      hasValidSupabaseUrl: Boolean(
+        configuration.supabaseUrl &&
+          isValidSupabaseUrl(configuration.supabaseUrl)
+      ),
+      hasSupabaseSecretKey: Boolean(configuration.supabaseSecretKey),
+      hasResendApiKey: Boolean(configuration.resendApiKey),
+      hasNewsletterAdminSecret: Boolean(configuration.adminSecret),
+      hasNewsletterFromEmail: Boolean(configuration.fromEmail)
+    });
+
+    return sendJson(response, 500, {
+      success: false,
+      message: FAILURE_MESSAGE
     });
   }
 
