@@ -1,3 +1,5 @@
+import { createClient } from "@supabase/supabase-js";
+
 const INVALID_EMAIL_MESSAGE = "请输入有效邮箱。";
 const DUPLICATE_EMAIL_MESSAGE = "你已经订阅过了。";
 const SUCCESS_MESSAGE = "订阅成功，后续更新会发送到你的邮箱。";
@@ -35,37 +37,23 @@ function normalizeEnvironmentValue(value) {
   return normalizedValue;
 }
 
-function logSupabaseError(error) {
+function isValidSupabaseUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && url.hostname.endsWith(".supabase.co");
+  } catch {
+    return false;
+  }
+}
+
+function logSupabaseError(error, status) {
   console.error("Supabase subscribers insert failed:", {
+    status,
     message: error?.message,
     code: error?.code,
     details: error?.details,
     hint: error?.hint
   });
-}
-
-async function readSupabaseError(supabaseResponse) {
-  const responseText = await supabaseResponse.text();
-
-  if (!responseText) {
-    return {
-      message: `Supabase returned HTTP ${supabaseResponse.status}`,
-      code: String(supabaseResponse.status),
-      details: null,
-      hint: null
-    };
-  }
-
-  try {
-    return JSON.parse(responseText);
-  } catch {
-    return {
-      message: responseText,
-      code: String(supabaseResponse.status),
-      details: null,
-      hint: null
-    };
-  }
 }
 
 export default async function handler(request, response) {
@@ -105,54 +93,53 @@ export default async function handler(request, response) {
     process.env.SUPABASE_SECRET_KEY
   );
 
-  if (!supabaseUrl || !supabaseSecretKey) {
-    console.error("Supabase subscription configuration is missing.");
+  if (
+    !supabaseUrl ||
+    !supabaseSecretKey ||
+    !isValidSupabaseUrl(supabaseUrl)
+  ) {
+    console.error("Supabase subscription configuration is missing or invalid:", {
+      hasSupabaseUrl: Boolean(supabaseUrl),
+      hasSupabaseSecretKey: Boolean(supabaseSecretKey),
+      hasValidSupabaseUrl: Boolean(
+        supabaseUrl && isValidSupabaseUrl(supabaseUrl)
+      )
+    });
+
     return sendJson(response, 500, {
       success: false,
       message: FAILURE_MESSAGE
     });
   }
 
-  const headers = {
-    apikey: supabaseSecretKey,
-    "Content-Type": "application/json",
-    "Content-Profile": "public",
-    Prefer: "return=minimal"
-  };
-
-  // Legacy service-role keys are JWTs and also authenticate through Bearer.
-  // New sb_secret_ keys authenticate through apikey and reject Bearer usage.
-  if (supabaseSecretKey.startsWith("eyJ")) {
-    headers.Authorization = `Bearer ${supabaseSecretKey}`;
-  }
+  const supabase = createClient(supabaseUrl, supabaseSecretKey, {
+    auth: {
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+      persistSession: false
+    },
+    db: {
+      schema: "public"
+    }
+  });
 
   try {
-    const supabaseResponse = await fetch(
-      `${supabaseUrl}/rest/v1/subscribers`,
-      {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
+    const { error, status } = await supabase
+      .from("subscribers")
+      .insert([
+        {
           email: normalizedEmail,
           status: "active",
           source: "website"
-        })
-      }
-    );
-
-    if (supabaseResponse.ok) {
-      return sendJson(response, 201, {
-        success: true,
-        message: SUCCESS_MESSAGE
-      });
-    }
-
-    const error = await readSupabaseError(supabaseResponse);
+        }
+      ])
+      .select("id")
+      .single();
 
     const isDuplicate =
-      supabaseResponse.status === 409 ||
-      error.code === "23505" ||
-      String(error.message ?? "").toLowerCase().includes("duplicate key");
+      status === 409 ||
+      error?.code === "23505" ||
+      String(error?.message ?? "").toLowerCase().includes("duplicate key");
 
     if (isDuplicate) {
       return sendJson(response, 409, {
@@ -161,14 +148,21 @@ export default async function handler(request, response) {
       });
     }
 
-    logSupabaseError(error);
+    if (error) {
+      logSupabaseError(error, status);
 
-    return sendJson(response, 500, {
-      success: false,
-      message: FAILURE_MESSAGE
+      return sendJson(response, 500, {
+        success: false,
+        message: FAILURE_MESSAGE
+      });
+    }
+
+    return sendJson(response, 201, {
+      success: true,
+      message: SUCCESS_MESSAGE
     });
   } catch (error) {
-    logSupabaseError(error);
+    logSupabaseError(error, error?.status);
 
     return sendJson(response, 500, {
       success: false,
