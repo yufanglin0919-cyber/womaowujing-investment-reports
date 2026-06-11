@@ -20,6 +20,10 @@ import { SITE_TITLE } from "../../consts";
         box-sizing: border-box;
       }
 
+      [hidden] {
+        display: none !important;
+      }
+
       body {
         margin: 0;
         background: #f5f7fb;
@@ -76,6 +80,49 @@ import { SITE_TITLE } from "../../consts";
         color: #667085;
         font-size: 15px;
         line-height: 1.7;
+      }
+
+      .login-form {
+        max-width: 460px;
+      }
+
+      .login-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .login-button {
+        background: #1d4ed8;
+        color: #ffffff;
+      }
+
+      .login-message {
+        min-height: 24px;
+        margin: 16px 0 0;
+        color: #667085;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .login-message[data-state="error"] {
+        color: #b42318;
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .logout-button {
+        min-height: 38px;
+        padding: 0 14px;
+        border-color: #cfd6df;
+        background: #ffffff;
+        color: #596273;
+        font-size: 14px;
       }
 
       form {
@@ -202,6 +249,15 @@ import { SITE_TITLE } from "../../consts";
         button {
           width: 100%;
         }
+
+        .panel-header {
+          display: block;
+        }
+
+        .logout-button {
+          width: auto;
+          margin-bottom: 22px;
+        }
       }
     </style>
   </head>
@@ -214,22 +270,47 @@ import { SITE_TITLE } from "../../consts";
     </header>
 
     <main>
-      <section class="panel">
-        <h1>Newsletter 管理</h1>
-        <p class="intro">先发送测试邮件确认内容，再进行正式群发。</p>
+      <section id="login-panel" class="panel">
+        <h1>管理员登录</h1>
+        <p class="intro">请输入管理员密码后继续。</p>
 
-        <form id="newsletter-form" novalidate>
+        <form id="login-form" class="login-form">
           <label>
             管理员密码
             <input
-              id="admin-secret"
+              id="login-secret"
               name="adminSecret"
               type="password"
-              autocomplete="off"
+              autocomplete="current-password"
               required
             />
           </label>
+          <div class="login-actions">
+            <button id="login-button" class="login-button" type="submit">
+              登录
+            </button>
+          </div>
+        </form>
+        <p
+          id="login-message"
+          class="login-message"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </section>
 
+      <section id="newsletter-panel" class="panel" hidden>
+        <div class="panel-header">
+          <div>
+            <h1>Newsletter 管理</h1>
+            <p class="intro">先发送测试邮件确认内容，再进行正式群发。</p>
+          </div>
+          <button id="logout-button" class="logout-button" type="button">
+            退出
+          </button>
+        </div>
+
+        <form id="newsletter-form" novalidate>
           <label>
             邮件标题
             <input
@@ -281,13 +362,54 @@ import { SITE_TITLE } from "../../consts";
     </main>
 
     <script>
+      const loginPanel = document.querySelector("#login-panel");
+      const newsletterPanel = document.querySelector("#newsletter-panel");
+      const loginForm = document.querySelector("#login-form");
+      const loginSecretInput = document.querySelector("#login-secret");
+      const loginButton = document.querySelector("#login-button");
+      const loginMessage = document.querySelector("#login-message");
+      const logoutButton = document.querySelector("#logout-button");
       const form = document.querySelector("#newsletter-form");
-      const adminSecretInput = document.querySelector("#admin-secret");
       const subjectInput = document.querySelector("#subject");
       const contentInput = document.querySelector("#content");
       const testEmailInput = document.querySelector("#test-email");
       const result = document.querySelector("#newsletter-result");
       const buttons = document.querySelectorAll("button[data-mode]");
+
+      function setAuthenticated(authenticated) {
+        if (
+          !(loginPanel instanceof HTMLElement) ||
+          !(newsletterPanel instanceof HTMLElement)
+        ) {
+          return;
+        }
+
+        loginPanel.hidden = authenticated;
+        newsletterPanel.hidden = !authenticated;
+      }
+
+      function showLoginMessage(message, state = "") {
+        if (!(loginMessage instanceof HTMLElement)) {
+          return;
+        }
+
+        loginMessage.textContent = message;
+        loginMessage.dataset.state = state;
+      }
+
+      async function checkSession() {
+        try {
+          const response = await fetch("/api/admin/verify", {
+            method: "GET",
+            credentials: "same-origin",
+            cache: "no-store"
+          });
+
+          setAuthenticated(response.ok);
+        } catch {
+          setAuthenticated(false);
+        }
+      }
 
       function setBusy(isBusy, activeMode = "") {
         buttons.forEach((button) => {
@@ -333,7 +455,6 @@ import { SITE_TITLE } from "../../consts";
       async function sendNewsletter(mode) {
         if (
           !(form instanceof HTMLFormElement) ||
-          !(adminSecretInput instanceof HTMLInputElement) ||
           !(subjectInput instanceof HTMLInputElement) ||
           !(contentInput instanceof HTMLTextAreaElement) ||
           !(testEmailInput instanceof HTMLInputElement)
@@ -365,11 +486,11 @@ import { SITE_TITLE } from "../../consts";
         try {
           const response = await fetch("/api/newsletter/send", {
             method: "POST",
+            credentials: "same-origin",
             headers: {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              adminSecret: adminSecretInput.value,
               subject: subjectInput.value,
               content: contentInput.value,
               testEmail: testEmailInput.value,
@@ -377,6 +498,12 @@ import { SITE_TITLE } from "../../consts";
             })
           });
           const payload = await response.json();
+
+          if (response.status === 401) {
+            setAuthenticated(false);
+            showLoginMessage("登录已失效，请重新输入管理员密码。", "error");
+            return;
+          }
 
           showResult(payload, payload.success ? "success" : "error");
         } catch {
@@ -396,6 +523,66 @@ import { SITE_TITLE } from "../../consts";
           }
         });
       });
+
+      loginForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (
+          !(loginSecretInput instanceof HTMLInputElement) ||
+          !(loginButton instanceof HTMLButtonElement)
+        ) {
+          return;
+        }
+
+        loginButton.disabled = true;
+        loginButton.textContent = "验证中...";
+        showLoginMessage("");
+
+        try {
+          const response = await fetch("/api/admin/verify", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              adminSecret: loginSecretInput.value
+            })
+          });
+          const payload = await response.json();
+
+          if (!response.ok || !payload.authenticated) {
+            showLoginMessage(
+              payload.message ?? "管理员密码错误",
+              "error"
+            );
+            return;
+          }
+
+          loginSecretInput.value = "";
+          showLoginMessage("");
+          setAuthenticated(true);
+        } catch {
+          showLoginMessage("管理员验证失败，请稍后再试。", "error");
+        } finally {
+          loginButton.disabled = false;
+          loginButton.textContent = "登录";
+        }
+      });
+
+      logoutButton?.addEventListener("click", async () => {
+        try {
+          await fetch("/api/admin/verify", {
+            method: "DELETE",
+            credentials: "same-origin"
+          });
+        } finally {
+          setAuthenticated(false);
+          showLoginMessage("已退出管理员登录。");
+        }
+      });
+
+      void checkSession();
     </script>
   </body>
 </html>

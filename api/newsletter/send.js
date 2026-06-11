@@ -1,6 +1,9 @@
-import { timingSafeEqual } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
+import {
+  isAdminRequestAuthorized,
+  normalizeEnvironmentValue
+} from "../../server/admin-auth.js";
 
 const BATCH_SIZE = 50;
 const BATCH_DELAY_MS = 220;
@@ -22,20 +25,6 @@ function parseBody(body) {
   return body ?? {};
 }
 
-function normalizeEnvironmentValue(value) {
-  const normalizedValue = value?.trim();
-
-  if (
-    normalizedValue?.length >= 2 &&
-    ((normalizedValue.startsWith('"') && normalizedValue.endsWith('"')) ||
-      (normalizedValue.startsWith("'") && normalizedValue.endsWith("'")))
-  ) {
-    return normalizedValue.slice(1, -1).trim();
-  }
-
-  return normalizedValue;
-}
-
 function isValidSupabaseUrl(value) {
   try {
     const url = new URL(value);
@@ -51,25 +40,6 @@ function isValidEmail(value) {
 
 function isSafeHeaderValue(value) {
   return Boolean(value) && value.length <= 320 && !/[\r\n]/.test(value);
-}
-
-function readBearerToken(authorizationHeader) {
-  if (typeof authorizationHeader !== "string") {
-    return "";
-  }
-
-  const match = authorizationHeader.match(/^Bearer\s+(.+)$/i);
-  return match?.[1]?.trim() ?? "";
-}
-
-function secretsMatch(receivedSecret, expectedSecret) {
-  const receivedBuffer = Buffer.from(receivedSecret);
-  const expectedBuffer = Buffer.from(expectedSecret);
-
-  return (
-    receivedBuffer.length === expectedBuffer.length &&
-    timingSafeEqual(receivedBuffer, expectedBuffer)
-  );
 }
 
 function escapeHtml(value) {
@@ -297,13 +267,14 @@ export default async function handler(request, response) {
   }
 
   const submittedAdminSecret =
-    typeof body.adminSecret === "string"
-      ? body.adminSecret.trim()
-      : readBearerToken(request.headers?.authorization);
+    typeof body.adminSecret === "string" ? body.adminSecret.trim() : "";
 
   if (
-    !submittedAdminSecret ||
-    !secretsMatch(submittedAdminSecret, configuration.adminSecret)
+    !isAdminRequestAuthorized(
+      request,
+      configuration.adminSecret,
+      submittedAdminSecret
+    )
   ) {
     return sendJson(response, 401, {
       success: false,
