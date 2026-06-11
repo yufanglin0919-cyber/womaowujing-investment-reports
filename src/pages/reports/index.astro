@@ -1,6 +1,13 @@
 ---
 const reports = [
   {
+    title: "今晚美股大涨：不是普通反弹，而是科技主线的风险偏好修复",
+    date: "2026-06-12",
+    type: "市场观点",
+    desc: "观察科技与半导体领涨背后的风险偏好修复，以及反弹延续需要验证的信号。",
+    link: "/articles/us-tech-risk-appetite-recovery-2026-06-12/"
+  },
+  {
     title: "6月10日美股市场观点：科技主线降温，宏观压力重新抬头",
     date: "2026-06-10",
     type: "市场观点",
@@ -20,8 +27,8 @@ const reports = [
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <title>研报与观点 - 398的美股策略</title>
-    <meta name="description" content="398的美股策略研报与市场观点归档。" />
+    <title>市场观点 - 398的美股策略</title>
+    <meta name="description" content="398的美股策略市场观点与阶段复盘归档。" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       * { box-sizing: border-box; }
@@ -31,6 +38,7 @@ const reports = [
       nav a { color: #111827; text-decoration: none; }
       .brand { font-size: 20px; font-weight: 800; }
       .links { display: flex; gap: 28px; font-size: 15px; }
+      .links a { font-weight: 700; }
       main { width: min(920px, calc(100% - 48px)); margin: 0 auto; padding: 80px 0 112px; }
       h1 { margin: 0 0 14px; font-size: 38px; letter-spacing: 0; }
       .intro { margin: 0 0 56px; color: #5b6470; line-height: 1.8; }
@@ -67,10 +75,10 @@ const reports = [
     </header>
 
     <main>
-      <h1>研报与观点</h1>
-      <p class="intro">美股投资报告、市场观点和阶段性复盘。</p>
+      <h1>市场观点</h1>
+      <p class="intro">美股市场观点、个股观察和阶段性复盘。</p>
 
-      <section class="report-list" aria-label="研报与观点列表">
+      <section class="report-list" aria-label="市场观点列表">
         {reports.map((report) => (
           <a class="report" href={report.link}>
             <div class="meta">
