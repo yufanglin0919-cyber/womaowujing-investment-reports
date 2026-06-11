@@ -1,0 +1,163 @@
+---
+import { SITE_TITLE } from "../consts";
+---
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>退订邮件更新 - {SITE_TITLE}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+        color: #172033;
+        background: #f5f7fb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: #f5f7fb;
+      }
+
+      main {
+        width: min(520px, 100%);
+        padding: 36px;
+        border: 1px solid #e2e7ee;
+        border-radius: 20px;
+        background: #ffffff;
+        box-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0 0 16px;
+        font-size: 30px;
+        line-height: 1.35;
+      }
+
+      p {
+        margin: 0;
+        color: #667085;
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      button {
+        min-height: 46px;
+        margin-top: 26px;
+        padding: 0 22px;
+        border: 0;
+        border-radius: 10px;
+        background: #1d4ed8;
+        color: #ffffff;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.65;
+      }
+
+      a {
+        display: inline-block;
+        margin-top: 22px;
+        color: #1d4ed8;
+        font-size: 14px;
+        text-decoration: none;
+      }
+
+      @media (max-width: 520px) {
+        main {
+          padding: 30px 22px;
+        }
+
+        h1 {
+          font-size: 26px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 id="unsubscribe-title">退订邮件更新</h1>
+      <p id="unsubscribe-message">确认后，你将不再收到后续邮件更新。</p>
+      <button id="unsubscribe-button" type="button">确认退订</button>
+      <br />
+      <a href="/">返回首页</a>
+    </main>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token") ?? "";
+      const isTest = params.get("test") === "1";
+      const title = document.querySelector("#unsubscribe-title");
+      const message = document.querySelector("#unsubscribe-message");
+      const button = document.querySelector("#unsubscribe-button");
+
+      function showState(nextTitle, nextMessage, hideButton = false) {
+        if (title instanceof HTMLElement) {
+          title.textContent = nextTitle;
+        }
+        if (message instanceof HTMLElement) {
+          message.textContent = nextMessage;
+        }
+        if (button instanceof HTMLButtonElement) {
+          button.hidden = hideButton;
+        }
+      }
+
+      if (isTest) {
+        showState(
+          "测试退订链接",
+          "这是测试邮件中的退订链接，不会修改任何订阅状态。",
+          true
+        );
+      } else if (!token) {
+        showState("退订链接无效", "链接缺少必要信息，请检查邮件中的原始链接。", true);
+      }
+
+      button?.addEventListener("click", async () => {
+        if (!(button instanceof HTMLButtonElement) || !token || isTest) {
+          return;
+        }
+
+        button.disabled = true;
+        button.textContent = "处理中...";
+
+        try {
+          const response = await fetch("/api/newsletter/unsubscribe", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ token })
+          });
+          const payload = await response.json();
+
+          showState(
+            payload.success ? "退订成功" : "退订未完成",
+            payload.message ?? "退订失败，请稍后再试。",
+            payload.success
+          );
+        } catch {
+          showState("退订未完成", "退订失败，请稍后再试。");
+        } finally {
+          button.disabled = false;
+          button.textContent = "确认退订";
+        }
+      });
+    </script>
+  </body>
+</html>

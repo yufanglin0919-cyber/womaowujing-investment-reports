@@ -7,7 +7,13 @@ import { defineConfig, fontProviders } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://womaowujing-investment-reports-6mr4.vercel.app',
-	integrations: [mdx(), sitemap()],
+	integrations: [
+		mdx(),
+		sitemap({
+			filter: (page) =>
+				!page.includes('/admin/') && !page.includes('/unsubscribe/'),
+		}),
+	],
 	fonts: [
 		{
 			provider: fontProviders.local(),

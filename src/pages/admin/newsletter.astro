@@ -1,0 +1,401 @@
+---
+import { SITE_TITLE } from "../../consts";
+---
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Newsletter 管理 - {SITE_TITLE}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+        color: #172033;
+        background: #f5f7fb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #f5f7fb;
+      }
+
+      header {
+        border-bottom: 1px solid #e5e9f0;
+        background: #ffffff;
+      }
+
+      nav {
+        width: min(920px, calc(100% - 40px));
+        min-height: 68px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      nav a {
+        color: #172033;
+        font-size: 15px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .brand {
+        font-size: 18px;
+      }
+
+      main {
+        width: min(760px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 56px 0 80px;
+      }
+
+      .panel {
+        padding: 36px;
+        border: 1px solid #e2e7ee;
+        border-radius: 20px;
+        background: #ffffff;
+        box-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 32px;
+        line-height: 1.35;
+      }
+
+      .intro {
+        margin: 0 0 32px;
+        color: #667085;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      form {
+        display: grid;
+        gap: 22px;
+      }
+
+      label {
+        display: grid;
+        gap: 9px;
+        color: #344054;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid #cfd6df;
+        border-radius: 10px;
+        background: #ffffff;
+        color: #172033;
+        font: inherit;
+        font-weight: 400;
+      }
+
+      input {
+        height: 48px;
+        padding: 0 14px;
+      }
+
+      textarea {
+        min-height: 240px;
+        padding: 14px;
+        line-height: 1.75;
+        resize: vertical;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: #2563eb;
+        outline: 2px solid #b8ccff;
+        outline-offset: 1px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-top: 4px;
+      }
+
+      button {
+        min-height: 46px;
+        padding: 0 20px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .test-button {
+        border-color: #cfd6df;
+        background: #ffffff;
+        color: #344054;
+      }
+
+      .send-button {
+        background: #1d4ed8;
+        color: #ffffff;
+      }
+
+      button:hover:not(:disabled) {
+        transform: translateY(-1px);
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.62;
+      }
+
+      .result {
+        min-height: 26px;
+        margin-top: 24px;
+        padding: 16px 18px;
+        border-radius: 10px;
+        background: #f8fafc;
+        color: #596273;
+        font-size: 14px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+      }
+
+      .result[data-state="success"] {
+        background: #ecfdf3;
+        color: #047857;
+      }
+
+      .result[data-state="error"] {
+        background: #fff1f0;
+        color: #b42318;
+      }
+
+      @media (max-width: 640px) {
+        main {
+          width: min(100% - 28px, 760px);
+          padding: 32px 0 52px;
+        }
+
+        nav {
+          width: calc(100% - 28px);
+        }
+
+        .panel {
+          padding: 26px 20px;
+        }
+
+        h1 {
+          font-size: 27px;
+        }
+
+        .actions,
+        button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a class="brand" href="/">398的美股策略</a>
+        <a href="/">返回首页</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h1>Newsletter 管理</h1>
+        <p class="intro">先发送测试邮件确认内容，再进行正式群发。</p>
+
+        <form id="newsletter-form" novalidate>
+          <label>
+            管理员密码
+            <input
+              id="admin-secret"
+              name="adminSecret"
+              type="password"
+              autocomplete="off"
+              required
+            />
+          </label>
+
+          <label>
+            邮件标题
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              maxlength="200"
+              required
+            />
+          </label>
+
+          <label>
+            邮件正文
+            <textarea
+              id="content"
+              name="content"
+              maxlength="10000"
+              required
+            ></textarea>
+          </label>
+
+          <label>
+            测试邮箱
+            <input
+              id="test-email"
+              name="testEmail"
+              type="email"
+              placeholder="用于接收测试邮件"
+            />
+          </label>
+
+          <div class="actions">
+            <button class="test-button" type="button" data-mode="test">
+              测试发送
+            </button>
+            <button class="send-button" type="button" data-mode="broadcast">
+              正式群发
+            </button>
+          </div>
+        </form>
+
+        <div
+          id="newsletter-result"
+          class="result"
+          role="status"
+          aria-live="polite"
+        >等待发送。</div>
+      </section>
+    </main>
+
+    <script>
+      const form = document.querySelector("#newsletter-form");
+      const adminSecretInput = document.querySelector("#admin-secret");
+      const subjectInput = document.querySelector("#subject");
+      const contentInput = document.querySelector("#content");
+      const testEmailInput = document.querySelector("#test-email");
+      const result = document.querySelector("#newsletter-result");
+      const buttons = document.querySelectorAll("button[data-mode]");
+
+      function setBusy(isBusy, activeMode = "") {
+        buttons.forEach((button) => {
+          if (!(button instanceof HTMLButtonElement)) {
+            return;
+          }
+
+          button.disabled = isBusy;
+          const mode = button.dataset.mode;
+          button.textContent =
+            isBusy && mode === activeMode
+              ? "发送中..."
+              : mode === "test"
+                ? "测试发送"
+                : "正式群发";
+        });
+      }
+
+      function showResult(payload, state) {
+        if (!(result instanceof HTMLElement)) {
+          return;
+        }
+
+        const lines = [payload.message ?? "请求已完成。"];
+
+        if (typeof payload.totalSubscribers === "number") {
+          lines.push(`订阅用户：${payload.totalSubscribers}`);
+        }
+        if (typeof payload.sentCount === "number") {
+          lines.push(`发送成功：${payload.sentCount}`);
+        }
+        if (typeof payload.failedCount === "number") {
+          lines.push(`发送失败：${payload.failedCount}`);
+        }
+        if (Array.isArray(payload.failedEmails) && payload.failedEmails.length) {
+          lines.push(`失败邮箱：${payload.failedEmails.join(", ")}`);
+        }
+
+        result.textContent = lines.join("\n");
+        result.dataset.state = state;
+      }
+
+      async function sendNewsletter(mode) {
+        if (
+          !(form instanceof HTMLFormElement) ||
+          !(adminSecretInput instanceof HTMLInputElement) ||
+          !(subjectInput instanceof HTMLInputElement) ||
+          !(contentInput instanceof HTMLTextAreaElement) ||
+          !(testEmailInput instanceof HTMLInputElement)
+        ) {
+          return;
+        }
+
+        if (!form.reportValidity()) {
+          return;
+        }
+
+        if (mode === "test" && !testEmailInput.value.trim()) {
+          testEmailInput.setCustomValidity("请输入测试邮箱。");
+          testEmailInput.reportValidity();
+          testEmailInput.setCustomValidity("");
+          return;
+        }
+
+        if (
+          mode === "broadcast" &&
+          !window.confirm("正式群发将发送给所有 active 订阅用户，确定继续吗？")
+        ) {
+          return;
+        }
+
+        setBusy(true, mode);
+        showResult({ message: "正在发送，请稍候。" }, "");
+
+        try {
+          const response = await fetch("/api/newsletter/send", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              adminSecret: adminSecretInput.value,
+              subject: subjectInput.value,
+              content: contentInput.value,
+              testEmail: testEmailInput.value,
+              mode
+            })
+          });
+          const payload = await response.json();
+
+          showResult(payload, payload.success ? "success" : "error");
+        } catch {
+          showResult(
+            { message: "邮件发送失败，请稍后再试。" },
+            "error"
+          );
+        } finally {
+          setBusy(false);
+        }
+      }
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (button instanceof HTMLButtonElement) {
+            void sendNewsletter(button.dataset.mode ?? "");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
