@@ -22,6 +22,10 @@ const reports = [
     link: "/articles/ai-stock-watch-2026-06-10/"
   }
 ];
+
+const sortedReports = [...reports].sort((a, b) =>
+  b.date.localeCompare(a.date)
+);
 ---
 
 <html lang="zh-CN">
@@ -50,6 +54,11 @@ const reports = [
       .report p { margin: 0; color: #5b6470; line-height: 1.75; }
       .arrow { color: #1d4ed8; font-size: 20px; }
       .report:hover h2 { color: #1d4ed8; }
+      .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 42px; }
+      .pagination button { display: grid; width: 40px; height: 40px; padding: 0; place-items: center; border: 1px solid #d7dde5; border-radius: 8px; background: #ffffff; color: #344054; font: inherit; font-weight: 700; cursor: pointer; }
+      .pagination button:hover:not(:disabled):not([aria-current="page"]) { border-color: #9db8f5; color: #1d4ed8; }
+      .pagination button[aria-current="page"] { border-color: #1d4ed8; background: #1d4ed8; color: #ffffff; }
+      .pagination button:disabled { cursor: default; opacity: 0.4; }
       footer { padding: 30px 24px; border-top: 1px solid #e5e7eb; color: #6b7280; text-align: center; font-size: 14px; }
       footer a { color: inherit; }
       @media (max-width: 640px) {
@@ -79,8 +88,8 @@ const reports = [
       <p class="intro">美股市场观点、个股观察和阶段性复盘。</p>
 
       <section class="report-list" aria-label="市场观点列表">
-        {reports.map((report) => (
-          <a class="report" href={report.link}>
+        {sortedReports.map((report, index) => (
+          <a class="report" href={report.link} data-list-item data-index={index}>
             <div class="meta">
               <span>{report.date}</span>
               <span>{report.type}</span>
@@ -93,10 +102,91 @@ const reports = [
           </a>
         ))}
       </section>
+
+      <nav
+        class="pagination"
+        aria-label="市场观点分页"
+        data-pagination
+        data-page-size="5"
+      ></nav>
     </main>
 
     <footer>
       © 2026 398的美股策略 · <a href="/disclaimer/">免责声明</a>
     </footer>
+
+    <script>
+      const list = document.querySelector(".report-list");
+      const pagination = document.querySelector("[data-pagination]");
+      const items = Array.from(document.querySelectorAll("[data-list-item]"));
+      const pageSize = Number(pagination?.getAttribute("data-page-size")) || 5;
+      const pageCount = Math.max(1, Math.ceil(items.length / pageSize));
+
+      function readPage() {
+        const page = Number(new URLSearchParams(window.location.search).get("page"));
+        return Number.isInteger(page) && page >= 1 && page <= pageCount ? page : 1;
+      }
+
+      function createButton(label, page, options = {}) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = label;
+        button.setAttribute("aria-label", options.ariaLabel ?? `第 ${page} 页`);
+
+        if (options.current) {
+          button.setAttribute("aria-current", "page");
+        }
+        if (options.disabled) {
+          button.disabled = true;
+        }
+
+        button.addEventListener("click", () => showPage(page, true));
+        return button;
+      }
+
+      function showPage(page, updateUrl = false) {
+        const currentPage = Math.min(Math.max(page, 1), pageCount);
+        const start = (currentPage - 1) * pageSize;
+        const end = start + pageSize;
+
+        items.forEach((item, index) => {
+          if (item instanceof HTMLElement) {
+            item.hidden = index < start || index >= end;
+          }
+        });
+
+        if (pagination instanceof HTMLElement) {
+          pagination.replaceChildren(
+            createButton("←", currentPage - 1, {
+              ariaLabel: "上一页",
+              disabled: currentPage === 1
+            }),
+            ...Array.from({ length: pageCount }, (_, index) =>
+              createButton(String(index + 1), index + 1, {
+                current: index + 1 === currentPage
+              })
+            ),
+            createButton("→", currentPage + 1, {
+              ariaLabel: "下一页",
+              disabled: currentPage === pageCount
+            })
+          );
+        }
+
+        if (updateUrl) {
+          const url = new URL(window.location.href);
+          if (currentPage === 1) {
+            url.searchParams.delete("page");
+          } else {
+            url.searchParams.set("page", String(currentPage));
+          }
+          window.history.pushState({ page: currentPage }, "", url);
+          list?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+
+      window.addEventListener("popstate", () => showPage(readPage()));
+      showPage(readPage());
+    </script>
   </body>
 </html>
